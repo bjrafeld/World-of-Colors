@@ -27,10 +27,10 @@ public class CharacterPhysics: MonoBehaviour
 	public float jumpVel = 4f; 	// jump velocity
 	
 	private float moveVel;
-	private float pVel = 0f;
 
 	private Vector2 physVel = new Vector2();
 	[HideInInspector] public bool grounded = false;
+	private int groundMask = 8;
 	
 	public virtual void Awake()
 	{
@@ -41,22 +41,9 @@ public class CharacterPhysics: MonoBehaviour
 	// Use this for initialization
 	public virtual void Start () 
 	{
-		moveVel = runVel;
+
 	}
-	
-	// Update is called once per frame
-	public virtual void UpdateMovement() 
-	{	
-		// teleport me to the other side of the screen when I reach the edge
-		if(_transform.position.x > 4f)
-		{
-			_transform.position = new Vector3(-4f,_transform.position.y, 0);
-		}
-		if(_transform.position.x < -4f)
-		{
-			_transform.position = new Vector3(4f,_transform.position.y, 0);
-		}
-	}
+
 	
 	// ============================== FIXEDUPDATE ============================== 
 
@@ -71,7 +58,7 @@ public class CharacterPhysics: MonoBehaviour
 		if(Input.GetKey(KeyCode.LeftArrow)) 
 		{ 
 			currentInputState = inputState.WalkLeft;
-			physVel.x = -moveVel;
+			physVel.x = -runVel;
 			facingDir = facing.Left;
 		}
 		
@@ -79,7 +66,7 @@ public class CharacterPhysics: MonoBehaviour
 		if (Input.GetKey(KeyCode.RightArrow) && currentInputState != inputState.WalkLeft) 
 		{ 
 			currentInputState = inputState.WalkRight;
-			physVel.x = moveVel;
+			physVel.x = runVel;
 			facingDir = facing.Right;
 		}
 		
@@ -91,7 +78,7 @@ public class CharacterPhysics: MonoBehaviour
 			{
 				_rigidbody.velocity = new Vector2(physVel.x, jumpVel);
 				grounded = false;
-			}
+			} 
 		}
 
 		_rigidbody.velocity = new Vector2(physVel.x, _rigidbody.velocity.y);
@@ -99,7 +86,7 @@ public class CharacterPhysics: MonoBehaviour
 	}
 
 	public void OnCollisionEnter2D(Collision2D col) {
-		if (col.transform.tag == "Ground") {
+		if (col.gameObject.layer == groundMask) {
 			Debug.Log ("Hit the ground.");
 			grounded = true;
 		}
