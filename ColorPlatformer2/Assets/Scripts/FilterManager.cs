@@ -13,9 +13,17 @@ public class FilterManager : MonoBehaviour {
 
 	private string activeFilter;
 
+	//For no assets
+	private Color activeColor;
+
+	public Color color1;
+	public Color color2;
+	public Color color3;
+	public Color offColor;
+
 	// Use this for initialization
 	void Start () {
-		
+		SetColorFilter(COLOR1);
 	}
 	
 	// Update is called once per frame
@@ -33,17 +41,22 @@ public class FilterManager : MonoBehaviour {
 
 		if(color == COLOR1) {
 			activeFilter = colorTag1;
+			activeColor = color1;
 		} else if (color == COLOR2) {
 			activeFilter = colorTag2;
+			activeColor = color2;
 		} else if (color == COLOR3) {
 			activeFilter = colorTag3;
+			activeColor = color3;
 		}
 		BoxCollider2D[] platforms = GetComponentsInChildren<BoxCollider2D>();
 
 		foreach(BoxCollider2D platform in platforms) {
 			if (platform.tag == activeFilter) {
+				platform.gameObject.renderer.material.color = activeColor;
 				platform.enabled = true;
 			} else {
+				platform.gameObject.renderer.material.color = offColor;
 				platform.enabled = false;
 			}
 		}
