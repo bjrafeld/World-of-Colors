@@ -71,7 +71,7 @@ public class CharacterPhysics: MonoBehaviour
 		}
 		
 		// jump
-		if (Input.GetKey(KeyCode.Space)) 
+		if (Input.GetKey(KeyCode.Space) || Input.GetKey (KeyCode.UpArrow)) 
 		{ 
 			currentInputState = inputState.Jump;
 			if(grounded)
@@ -91,11 +91,4 @@ public class CharacterPhysics: MonoBehaviour
 			grounded = true;
 		}
 	}
-}
-
-public enum MyTeam 
-{
-	Team1,
-	Team2,
-	None
 }

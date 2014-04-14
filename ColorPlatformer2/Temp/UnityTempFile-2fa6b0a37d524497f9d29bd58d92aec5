@@ -36,7 +36,9 @@
 -define:ENABLE_PROFILER
 -define:UNITY_EDITOR
 -define:UNITY_EDITOR_OSX
+'Assets/Scripts/CameraMovement.cs'
 'Assets/Scripts/CharacterPhysics.cs'
 'Assets/Scripts/FilterManager.cs'
+'Assets/Scripts/MainMenuLayout.cs'
 -r:'/Applications/Unity/Unity.app/Contents/Frameworks/Mono/lib/mono/unity/System.Runtime.Serialization.dll'
 -r:'/Applications/Unity/Unity.app/Contents/Frameworks/Mono/lib/mono/unity/System.Xml.Linq.dll'
