@@ -29,13 +29,14 @@ public class CharacterPhysics: MonoBehaviour
 	private float moveVel;
 
 	private Vector2 physVel = new Vector2();
+    private Transform groundCheck;
 	[HideInInspector] public bool grounded = false;
-	private int groundMask = 8;
 	
 	public virtual void Awake()
 	{
 		_transform = transform;
 		_rigidbody = rigidbody2D;
+        groundCheck = transform.Find("groundCheck");
 	}
 	
 	// Use this for initialization
@@ -53,7 +54,9 @@ public class CharacterPhysics: MonoBehaviour
 		currentInputState = inputState.None;
 
 		physVel = Vector2.zero;
-		
+
+        grounded = Physics2D.Linecast(_transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+        Debug.Log(grounded);
 		// move left
 		if(Input.GetKey(KeyCode.LeftArrow)) 
 		{ 
@@ -85,10 +88,17 @@ public class CharacterPhysics: MonoBehaviour
 
 	}
 
+    public void Update()
+    {
+        if (Input.GetKey(KeyCode.R))
+        {
+            Application.LoadLevel(Application.loadedLevel);
+        }
+    }
 	public void OnCollisionEnter2D(Collision2D col) {
-		if (col.gameObject.layer == groundMask) {
+		/*if (col.gameObject.layer == groundMask) {
 			Debug.Log ("Hit the ground.");
 			grounded = true;
-		}
+		}*/
 	}
 }

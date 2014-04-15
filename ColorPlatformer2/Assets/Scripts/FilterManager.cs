@@ -12,6 +12,7 @@ public class FilterManager : MonoBehaviour {
 	public string colorTag3;
 
 	private string activeFilter;
+    private BoxCollider2D[] _platforms;
 
 	//For no assets
 	private Color activeColor;
@@ -25,7 +26,11 @@ public class FilterManager : MonoBehaviour {
 	void Start () {
 		SetColorFilter(COLOR1);
 	}
-	
+
+    void Awake()
+    {
+        _platforms = GetComponentsInChildren<BoxCollider2D>();
+    }
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.A)) {
@@ -49,9 +54,8 @@ public class FilterManager : MonoBehaviour {
 			activeFilter = colorTag3;
 			activeColor = color3;
 		}
-		BoxCollider2D[] platforms = GetComponentsInChildren<BoxCollider2D>();
 
-		foreach(BoxCollider2D platform in platforms) {
+		foreach(BoxCollider2D platform in _platforms) {
 			if (platform.tag == activeFilter) {
 				platform.gameObject.renderer.material.color = activeColor;
 				platform.enabled = true;
