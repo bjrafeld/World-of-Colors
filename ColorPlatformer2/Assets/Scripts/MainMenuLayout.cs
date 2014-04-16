@@ -14,8 +14,8 @@ public class MainMenuLayout : MonoBehaviour {
 	}
 	
 	void OnGUI() {
-		float centerPointX = (Camera.main.pixelWidth/2);
-		float centerPointY = (Camera.main.pixelHeight/2 - buttonHeight/2);
+		float centerPointX = (Camera.main.pixelWidth/2 - buttonWidth);
+		float centerPointY = (0 + buttonHeight);
 		if(GUI.Button (new Rect((centerPointX - (1/2)*buttonWidth), centerPointY , buttonWidth, buttonHeight), "Level 1")) {
 			Debug.Log ("Sandbox clicked");
 			Application.LoadLevel("Level_1");
@@ -29,6 +29,11 @@ public class MainMenuLayout : MonoBehaviour {
 		if(GUI.Button (new Rect((centerPointX - (1/2)*buttonWidth), centerPointY + (2*heightBuffer), buttonWidth, buttonHeight), "Level 3")) {
 			Debug.Log ("Sandbox clicked");
 			Application.LoadLevel("Level_3");
+		}
+
+		if(GUI.Button (new Rect((centerPointX - (1/2)*buttonWidth), centerPointY + (3*heightBuffer), buttonWidth, buttonHeight), "Level 4")) {
+			Debug.Log ("Sandbox clicked");
+			Application.LoadLevel("Level_4");
 		}
 	}
 }
