@@ -31,6 +31,10 @@ public class CharacterPhysics: MonoBehaviour
 	private Vector2 physVel = new Vector2();
     private Transform groundCheck;
 	[HideInInspector] public bool grounded = false;
+
+	private Vector3 center;
+	private Vector3 size;
+
 	
 	public virtual void Awake()
 	{
@@ -42,7 +46,8 @@ public class CharacterPhysics: MonoBehaviour
 	// Use this for initialization
 	public virtual void Start () 
 	{
-
+		center = GetComponent<BoxCollider2D>().center;
+		size = GetComponent<BoxCollider2D>().size;
 	}
 
 	
@@ -55,8 +60,16 @@ public class CharacterPhysics: MonoBehaviour
 
 		physVel = Vector2.zero;
 
-        grounded = Physics2D.Linecast(_transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+		for(int i = 0; i<3; i++) {
+			Vector3 start = _transform.position;
+			start.x = (size.x/2 * (float)i);
+			if(Physics2D.Linecast(start, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"))) {
+				grounded = true;
+			}
+		}
+        
         Debug.Log(grounded);
+
 		// move left
 		if(Input.GetKey(KeyCode.LeftArrow)) 
 		{ 
