@@ -94,6 +94,10 @@ public class CharacterPhysics: MonoBehaviour
         {
             Application.LoadLevel(Application.loadedLevel);
         }
+
+		if (Input.GetKey(KeyCode.Escape)) {
+			Application.LoadLevel("main_menu");
+		}
     }
 	public void OnCollisionEnter2D(Collision2D col) {
 		/*if (col.gameObject.layer == groundMask) {

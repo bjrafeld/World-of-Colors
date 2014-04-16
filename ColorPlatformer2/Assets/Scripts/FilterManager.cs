@@ -7,6 +7,8 @@ public class FilterManager : MonoBehaviour {
 	private const int COLOR2 = 2;
 	private const int COLOR3 = 3;
 
+	public int startColor = 1;
+
 	public string colorTag1;
 	public string colorTag2;
 	public string colorTag3;
@@ -17,14 +19,12 @@ public class FilterManager : MonoBehaviour {
 	//For no assets
 	private Color activeColor;
 
-	public Color color1;
-	public Color color2;
-	public Color color3;
-	public Color offColor;
+	public float transparency = 0.3f;
+	
 
 	// Use this for initialization
 	void Start () {
-		SetColorFilter(COLOR1);
+		SetColorFilter(startColor);
 	}
 
     void Awake()
@@ -46,21 +46,23 @@ public class FilterManager : MonoBehaviour {
 
 		if(color == COLOR1) {
 			activeFilter = colorTag1;
-			activeColor = color1;
 		} else if (color == COLOR2) {
 			activeFilter = colorTag2;
-			activeColor = color2;
 		} else if (color == COLOR3) {
 			activeFilter = colorTag3;
-			activeColor = color3;
 		}
 
 		foreach(BoxCollider2D platform in _platforms) {
+			SpriteRenderer render;
 			if (platform.tag == activeFilter) {
-				platform.gameObject.renderer.material.color = activeColor;
+				render = platform.gameObject.GetComponent<SpriteRenderer>();
+				render.color = Color.white;
 				platform.enabled = true;
 			} else {
-				platform.gameObject.renderer.material.color = offColor;
+				render = platform.gameObject.GetComponent<SpriteRenderer>();
+				Color transparent = Color.white;
+				transparent.a = transparency;
+				render.color = transparent;
 				platform.enabled = false;
 			}
 		}
