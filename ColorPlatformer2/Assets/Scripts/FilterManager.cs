@@ -33,11 +33,11 @@ public class FilterManager : MonoBehaviour {
     }
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.A)) {
+		if(Input.GetKeyDown(KeyCode.A) || Input.GetAxis("Blue") != 0) {
 			SetColorFilter(COLOR1);
-		} else if (Input.GetKeyDown(KeyCode.S)) {
+		} else if (Input.GetKeyDown(KeyCode.S) || Input.GetAxis("Red") != 0) {
 			SetColorFilter(COLOR2);
-		} else if (Input.GetKeyDown(KeyCode.D)) {
+		} else if (Input.GetKeyDown(KeyCode.D) || Input.GetAxis("Yellow") != 0) {
 			SetColorFilter(COLOR3);
 		}
 	}

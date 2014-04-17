@@ -58,44 +58,13 @@ public class CharacterPhysics: MonoBehaviour
 		// inputstate is none unless one of the movement keys are pressed
 		currentInputState = inputState.None;
 
-		physVel = Vector2.zero;
 
-		for(int i = 0; i<3; i++) {
-			Vector3 start = _transform.position;
-			start.x = (size.x/2 * (float)i);
-			if(Physics2D.Linecast(start, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"))) {
-				grounded = true;
-			}
-		}
+        if (Physics2D.Linecast(_transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground")))
+        {
+            grounded = true;
+        }
         
         Debug.Log(grounded);
-
-		// move left
-		if(Input.GetKey(KeyCode.LeftArrow)) 
-		{ 
-			currentInputState = inputState.WalkLeft;
-			physVel.x = -runVel;
-			facingDir = facing.Left;
-		}
-		
-		// move right
-		if (Input.GetKey(KeyCode.RightArrow) && currentInputState != inputState.WalkLeft) 
-		{ 
-			currentInputState = inputState.WalkRight;
-			physVel.x = runVel;
-			facingDir = facing.Right;
-		}
-		
-		// jump
-		if (Input.GetKey(KeyCode.Space) || Input.GetKey (KeyCode.UpArrow)) 
-		{ 
-			currentInputState = inputState.Jump;
-			if(grounded)
-			{
-				_rigidbody.velocity = new Vector2(physVel.x, jumpVel);
-				grounded = false;
-			} 
-		}
 
 		_rigidbody.velocity = new Vector2(physVel.x, _rigidbody.velocity.y);
 
@@ -111,6 +80,58 @@ public class CharacterPhysics: MonoBehaviour
 		if (Input.GetKey(KeyCode.Escape)) {
 			Application.LoadLevel("main_menu");
 		}
+
+        physVel = Vector2.zero;
+        //Handles joystick movement.
+        float hor = Input.GetAxis("HorizontalJoy");
+        bool leftStick = hor < 0;
+        bool rightStick = hor > 0;
+        
+        // move left
+        if (Input.GetKey(KeyCode.LeftArrow) || leftStick)
+        {
+            currentInputState = inputState.WalkLeft;
+            facingDir = facing.Left;
+            if (leftStick)
+            {
+                physVel.x = runVel * hor;
+            }
+            else
+            {
+                physVel.x = -runVel;
+            }
+        }
+
+        // move right
+        if ((Input.GetKey(KeyCode.RightArrow) || rightStick) && currentInputState != inputState.WalkLeft)
+        {
+            currentInputState = inputState.WalkRight;
+            facingDir = facing.Right;
+            if (rightStick)
+            {
+                physVel.x = runVel * hor;
+            }
+            else
+            {
+                physVel.x = runVel;
+            }
+        }
+
+        // jump
+        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow) || Input.GetAxis("Jump") != 0)
+        {
+            currentInputState = inputState.Jump;
+            if (grounded)
+            {
+                _rigidbody.velocity = new Vector2(physVel.x, jumpVel);
+                grounded = false;
+            }
+        }
+
+        if (currentInputState != inputState.Jump && hor == 0)
+        {
+            currentInputState = inputState.None;
+        }
     }
 	public void OnCollisionEnter2D(Collision2D col) {
 		/*if (col.gameObject.layer == groundMask) {
