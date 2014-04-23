@@ -106,6 +106,10 @@ public class CharacterPhysics: MonoBehaviour
         {
             grounded = true;
         }
+        else
+        {
+            grounded = false;
+        }
         
         Debug.Log(grounded);
 
