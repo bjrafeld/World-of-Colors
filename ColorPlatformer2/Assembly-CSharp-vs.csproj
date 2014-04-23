@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraMovement.cs" />
      <Compile Include="Assets\Scripts\CharacterPhysics.cs" />
+     <Compile Include="Assets\Scripts\Colorizer.cs" />
      <Compile Include="Assets\Scripts\FilterManager.cs" />
      <Compile Include="Assets\Scripts\LevelEndTrigger.cs" />
      <Compile Include="Assets\Scripts\MainMenuLayout.cs" />

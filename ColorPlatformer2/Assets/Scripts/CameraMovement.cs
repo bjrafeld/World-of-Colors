@@ -19,12 +19,16 @@ public class CameraMovement : MonoBehaviour {
 
 	private GameObject player;
 
+	private float _player_size;
+
 	// Use this for initialization
 	void Start () {
 		player = Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation) as GameObject;
 		if(cameraMove) {
 			this.transform.position = new Vector3(player.transform.position.x + offsetStart_X, player.transform.position.y + offsetStart_Y, -10f);
 		}
+		_player_size = player.transform.localScale.x/2;
+
 	}
 	
 	// Update is called once per frame
@@ -45,6 +49,18 @@ public class CameraMovement : MonoBehaviour {
 			}
 			if(player.transform.position.y > topRightBoundary.y) {
 				newCameraPosition.y += player.transform.position.y - topRightBoundary.y;
+			}
+		} else {
+			if(player.transform.position.x < (bottomLeftBoundary.x + _player_size)) {
+				player.transform.position = new Vector3((bottomLeftBoundary.x + _player_size), player.transform.position.y, player.transform.position.z);
+			}
+			if(player.transform.position.x > (topRightBoundary.x - _player_size)) {
+				player.transform.position = new Vector3((topRightBoundary.x - _player_size), player.transform.position.y, player.transform.position.z);
+			}
+
+			if (player.transform.position.y < (bottomLeftBoundary.y - 5)) {
+				Destroy(player);
+				player = Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation) as GameObject;
 			}
 		}
 		//Check for corner boundaries
