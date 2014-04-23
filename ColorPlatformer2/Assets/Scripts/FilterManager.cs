@@ -3,11 +3,11 @@ using System.Collections;
 
 public class FilterManager : MonoBehaviour {
 
-	private const int COLOR1 = 1;
-	private const int COLOR2 = 2;
-	private const int COLOR3 = 3;
+	private const int COLOR1 = 0;
+	private const int COLOR2 = 1;
+	private const int COLOR3 = 2;
 
-	public int startColor = 1;
+	public int startColor = 0;
 
 	public string colorTag1;
 	public string colorTag2;
@@ -34,12 +34,22 @@ public class FilterManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.A) || Input.GetAxis("Blue") != 0) {
-			SetColorFilter(COLOR1);
-		} else if (Input.GetKeyDown(KeyCode.S) || Input.GetAxis("Red") != 0) {
+ 
+            if (startColor == 0)
+            {
+                startColor = 2;
+            }
+            else
+            {
+                startColor -= 1;
+            }
+            SetColorFilter((startColor % 3)); 
+		} /*else if (Input.GetKeyDown(KeyCode.S) || Input.GetAxis("Red") != 0) {
 			SetColorFilter(COLOR2);
-		} else if (Input.GetKeyDown(KeyCode.D) || Input.GetAxis("Yellow") != 0) {
-			SetColorFilter(COLOR3);
-		}
+		} */else if (Input.GetKeyDown(KeyCode.D) || Input.GetAxis("Yellow") != 0) {
+            startColor += 1;
+            SetColorFilter((startColor % 3));
+        }
 	}
 
 	void SetColorFilter(int color) {
@@ -53,13 +63,11 @@ public class FilterManager : MonoBehaviour {
 		}
 
 		foreach(BoxCollider2D platform in _platforms) {
-			SpriteRenderer render;
+            SpriteRenderer render = platform.gameObject.GetComponent<SpriteRenderer>();
 			if (platform.tag == activeFilter) {
-				render = platform.gameObject.GetComponent<SpriteRenderer>();
 				render.color = Color.white;
 				platform.enabled = true;
 			} else {
-				render = platform.gameObject.GetComponent<SpriteRenderer>();
 				Color transparent = Color.white;
 				transparent.a = transparency;
 				render.color = transparent;
