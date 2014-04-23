@@ -17,6 +17,8 @@ public class CameraMovement : MonoBehaviour {
 
 	public bool cameraMove;
 
+	public bool resetOnKill = false;
+
 	private GameObject player;
 
 	private float _player_size;
@@ -59,8 +61,12 @@ public class CameraMovement : MonoBehaviour {
 			}
 
 			if (player.transform.position.y < (bottomLeftBoundary.y - 5)) {
-				Destroy(player);
-				player = Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation) as GameObject;
+				if(resetOnKill) {
+					Application.LoadLevel(Application.loadedLevel);
+				} else {
+					Destroy(player);
+					player = Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation) as GameObject;
+				}
 			}
 		}
 		//Check for corner boundaries

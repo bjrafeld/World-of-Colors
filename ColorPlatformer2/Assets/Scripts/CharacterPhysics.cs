@@ -25,6 +25,9 @@ public class CharacterPhysics: MonoBehaviour
 	// edit these to tune character movement	
 	public float runVel = 2.5f; 	// run speed
 	public float jumpVel = 4f; 	// jump velocity
+
+	public float buttonHeight = 30f;
+	public float buttonWidth = 100f;
 	
 	private float moveVel;
 
@@ -35,12 +38,15 @@ public class CharacterPhysics: MonoBehaviour
 	private Vector3 center;
 	private Vector3 size;
 
+	private bool paused = false;
+
 	
 	public virtual void Awake()
 	{
 		_transform = transform;
 		_rigidbody = rigidbody2D;
         groundCheck = transform.Find("groundCheck");
+		pause (false);
 	}
 	
 	// Use this for initialization
@@ -48,9 +54,42 @@ public class CharacterPhysics: MonoBehaviour
 	{
 		center = GetComponent<BoxCollider2D>().center;
 		size = GetComponent<BoxCollider2D>().size;
+
 	}
 
-	
+	public void OnGUI() {
+		if(paused) {
+			displayPauseMenu();
+		}
+	}
+
+	private void displayPauseMenu() {
+		float centerPointX = (Camera.main.pixelWidth/2 - buttonWidth);
+		float centerPointY = (0 + buttonHeight);
+		if(GUI.Button (new Rect((centerPointX - (1/2)*buttonWidth), centerPointY , buttonWidth, buttonHeight), "Main Menu")) {
+			Debug.Log ("Sandbox clicked");
+			Application.LoadLevel("Main_menu");
+		}
+	}
+
+	private void togglePause() {
+		if(paused) {
+			Time.timeScale = 1;
+			paused = false;
+		} else {
+			Time.timeScale = 0;
+			paused = true;
+		}
+	}
+
+	private void pause(bool freeze) {
+		paused = freeze;
+		if(paused) {
+			Time.timeScale = 0;
+		} else {
+			Time.timeScale = 1;
+		}
+	}
 	// ============================== FIXEDUPDATE ============================== 
 
 	public void FixedUpdate()
@@ -77,8 +116,8 @@ public class CharacterPhysics: MonoBehaviour
             Application.LoadLevel(Application.loadedLevel);
         }
 
-		if (Input.GetKey(KeyCode.Escape)) {
-			Application.LoadLevel("main_menu");
+		if (Input.GetKeyDown(KeyCode.Escape)) {
+			togglePause();
 		}
 
         physVel = Vector2.zero;
@@ -86,6 +125,7 @@ public class CharacterPhysics: MonoBehaviour
         float hor = Input.GetAxis("HorizontalJoy");
         bool leftStick = hor < 0;
         bool rightStick = hor > 0;
+
         
         // move left
         if (Input.GetKey(KeyCode.LeftArrow) || leftStick)
@@ -132,6 +172,7 @@ public class CharacterPhysics: MonoBehaviour
         {
             currentInputState = inputState.None;
         }
+
     }
 	public void OnCollisionEnter2D(Collision2D col) {
 		/*if (col.gameObject.layer == groundMask) {
