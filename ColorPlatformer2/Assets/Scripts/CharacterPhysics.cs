@@ -32,7 +32,7 @@ public class CharacterPhysics: MonoBehaviour
 	private float moveVel;
 
 	private Vector2 physVel = new Vector2();
-    private Transform groundCheck;
+    private Transform groundCheck, groundCheck1, groundCheck2;
 	[HideInInspector] public bool grounded = false;
 
 	private Vector3 center;
@@ -46,6 +46,8 @@ public class CharacterPhysics: MonoBehaviour
 		_transform = transform;
 		_rigidbody = rigidbody2D;
         groundCheck = transform.Find("groundCheck");
+        groundCheck1 = transform.Find("groundCheck1");
+        groundCheck2 = transform.Find("groundCheck2");
 		pause (false);
 	}
 	
@@ -98,7 +100,9 @@ public class CharacterPhysics: MonoBehaviour
 		currentInputState = inputState.None;
 
 
-        if (Physics2D.Linecast(_transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground")))
+        if (Physics2D.Linecast(_transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"))
+            || Physics2D.Linecast(_transform.position, groundCheck1.position, 1 << LayerMask.NameToLayer("Ground"))
+            || Physics2D.Linecast(_transform.position, groundCheck2.position, 1 << LayerMask.NameToLayer("Ground")))
         {
             grounded = true;
         }
