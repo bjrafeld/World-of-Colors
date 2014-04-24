@@ -18,7 +18,9 @@ public class CharacterPhysics: MonoBehaviour
 	
 	[HideInInspector] public bool alive = true;
 	[HideInInspector] public Vector3 spawnPos;
-	
+
+    private int startMenu;
+
 	protected Transform _transform;
 	protected Rigidbody2D _rigidbody;
 	
@@ -49,6 +51,7 @@ public class CharacterPhysics: MonoBehaviour
         groundCheck1 = transform.Find("groundCheck1");
         groundCheck2 = transform.Find("groundCheck2");
 		pause (false);
+        startMenu = 0;
 	}
 	
 	// Use this for initialization
@@ -110,8 +113,6 @@ public class CharacterPhysics: MonoBehaviour
         {
             grounded = false;
         }
-        
-        Debug.Log(grounded);
 
 		_rigidbody.velocity = new Vector2(physVel.x, _rigidbody.velocity.y);
 
@@ -119,14 +120,16 @@ public class CharacterPhysics: MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKey(KeyCode.R))
+        if (Input.GetButtonDown("Reset"))
         {
             Application.LoadLevel(Application.loadedLevel);
         }
 
-		if (Input.GetKeyDown(KeyCode.Escape)) {
+		if (Input.GetButtonDown("Pause")) {
+            startMenu++;
 			togglePause();
-		}
+            Debug.Log(Input.GetButtonDown("Pause"));
+        }
 
         physVel = Vector2.zero;
         //Handles joystick movement.

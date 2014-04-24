@@ -7,7 +7,7 @@ public class FilterManager : MonoBehaviour {
 	private const int COLOR2 = 1;
 	private const int COLOR3 = 2;
 
-	public int startColor = 0;
+	public int startColor;
 
 	public string colorTag1;
 	public string colorTag2;
@@ -24,6 +24,7 @@ public class FilterManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        startColor = 0;
 		SetColorFilter(startColor);
 	}
 
@@ -33,7 +34,7 @@ public class FilterManager : MonoBehaviour {
     }
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.A) || Input.GetAxis("Blue") != 0) {
+		if(Input.GetKeyDown(KeyCode.A) || Input.GetButtonDown("Blue")) {
  
             if (startColor == 0)
             {
@@ -46,7 +47,7 @@ public class FilterManager : MonoBehaviour {
             SetColorFilter((startColor % 3)); 
 		} /*else if (Input.GetKeyDown(KeyCode.S) || Input.GetAxis("Red") != 0) {
 			SetColorFilter(COLOR2);
-		} */else if (Input.GetKeyDown(KeyCode.D) || Input.GetAxis("Yellow") != 0) {
+		} */else if (Input.GetKeyDown(KeyCode.D) || Input.GetButtonDown("Yellow")) {
             startColor += 1;
             SetColorFilter((startColor % 3));
         }
