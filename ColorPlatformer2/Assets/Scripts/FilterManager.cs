@@ -9,7 +9,10 @@ public class FilterManager : MonoBehaviour {
 
 	public int startColor;
 
-	public string colorTag1;
+    public Material filterShader;
+    public Material defaultShader;
+
+    public string colorTag1;
 	public string colorTag2;
 	public string colorTag3;
 
@@ -66,12 +69,16 @@ public class FilterManager : MonoBehaviour {
 		foreach(BoxCollider2D platform in _platforms) {
             SpriteRenderer render = platform.gameObject.GetComponent<SpriteRenderer>();
 			if (platform.tag == activeFilter) {
-				render.color = Color.white;
+				//render.color = Color.white;
 				platform.enabled = true;
+                render.material = defaultShader;
+                render.sortingOrder = 0;
 			} else {
-				Color transparent = Color.white;
-				transparent.a = transparency;
-				render.color = transparent;
+				//Color transparent = Color.white;
+				//transparent.a = transparency;
+				//render.color = transparent;
+                render.material = filterShader;
+                render.sortingOrder = 0;
 				platform.enabled = false;
 			}
 		}
