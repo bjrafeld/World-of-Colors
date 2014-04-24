@@ -18,7 +18,7 @@ public class FilterManager : MonoBehaviour {
 
 	private string activeFilter;
     private BoxCollider2D[] _platforms;
-
+    private SpriteRenderer[] _sprites;
 	//For no assets
 	private Color activeColor;
 
@@ -34,6 +34,12 @@ public class FilterManager : MonoBehaviour {
     void Awake()
     {
         _platforms = GetComponentsInChildren<BoxCollider2D>();
+        _sprites = new SpriteRenderer[_platforms.Length];
+        for (int i = 0; i < _platforms.Length; i++)
+        {
+            _sprites[i] = _platforms[i].GetComponent<SpriteRenderer>();
+            _sprites[i].sortingOrder = 1;
+        }
     }
 	// Update is called once per frame
 	void Update () {
@@ -66,13 +72,14 @@ public class FilterManager : MonoBehaviour {
 			activeFilter = colorTag3;
 		}
 
-		foreach(BoxCollider2D platform in _platforms) {
-            SpriteRenderer render = platform.gameObject.GetComponent<SpriteRenderer>();
+		for(int i = 0; i < _platforms.Length; i++) {
+            BoxCollider2D platform = _platforms[i];
+            SpriteRenderer render = _sprites[i];
 			if (platform.tag == activeFilter) {
 				//render.color = Color.white;
-				platform.enabled = true;
                 render.material = defaultShader;
                 render.sortingOrder = 0;
+                platform.enabled = true;
 			} else {
 				//Color transparent = Color.white;
 				//transparent.a = transparency;
