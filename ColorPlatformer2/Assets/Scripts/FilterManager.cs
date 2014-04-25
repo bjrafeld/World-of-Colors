@@ -52,7 +52,7 @@ public class FilterManager : MonoBehaviour {
         }
 	}
 
-	void SetColorFilter(int color) {
+	public void SetColorFilter(int color) {
 
 		if(color == COLOR1) {
 			activeFilter = colorTag1;
@@ -73,6 +73,16 @@ public class FilterManager : MonoBehaviour {
 				render.color = transparent;
 				platform.enabled = false;
 			}
+		}
+	}
+
+	public void SetColorFilterTag(string tagName) {
+		if(tagName == colorTag1) {
+			SetColorFilter(0);
+		} else if (tagName == colorTag2) {
+			SetColorFilter(1);
+		} else if (tagName == colorTag3) {
+			SetColorFilter(2);
 		}
 	}
 }

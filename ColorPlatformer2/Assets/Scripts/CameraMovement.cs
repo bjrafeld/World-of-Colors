@@ -15,6 +15,9 @@ public class CameraMovement : MonoBehaviour {
 	public float edgeBottom = 0f;
 	public float edgeTop = 1f;
 
+	public float maxY, minY;
+	public float maxX, minX;
+
 	public bool cameraMove;
 
 	public bool resetOnKill = false;
@@ -26,9 +29,7 @@ public class CameraMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		player = Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation) as GameObject;
-		if(cameraMove) {
-			this.transform.position = new Vector3(player.transform.position.x + offsetStart_X, player.transform.position.y + offsetStart_Y, -10f);
-		}
+
 		_player_size = player.transform.localScale.x/2;
 
 	}
@@ -40,18 +41,39 @@ public class CameraMovement : MonoBehaviour {
 
 		Vector3 newCameraPosition = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z);
 		if(cameraMove) {
-			if(player.transform.position.x < bottomLeftBoundary.x) {
-				newCameraPosition.x += player.transform.position.x - bottomLeftBoundary.x; 
+			bool bounded = false;
+
+			if(transform.position.x < minX) {
+				newCameraPosition.x = minX;
+				bounded = true;
+			} else if(transform.position.x > maxX) {
+				newCameraPosition.x = maxX;
+				bounded = true;
 			}
-			if(player.transform.position.x > topRightBoundary.x) {
-				newCameraPosition.x += player.transform.position.x - topRightBoundary.x;
+			if(transform.position.y < minY) {
+				newCameraPosition.y = minY;
+				bounded = true;
+			} else if(transform.position.y > maxY) {
+				newCameraPosition.y = maxY;
+				bounded = true;
 			}
-			if(player.transform.position.y < bottomLeftBoundary.y) {
-				newCameraPosition.y += player.transform.position.y - bottomLeftBoundary.y;
+
+			if(!bounded) {
+
+				if(player.transform.position.x < bottomLeftBoundary.x) {
+					newCameraPosition.x += player.transform.position.x - bottomLeftBoundary.x; 
+				}
+				if(player.transform.position.x > topRightBoundary.x) {
+					newCameraPosition.x += player.transform.position.x - topRightBoundary.x;
+				}
+				if(player.transform.position.y < bottomLeftBoundary.y) {
+					newCameraPosition.y += player.transform.position.y - bottomLeftBoundary.y;
+				}
+				if(player.transform.position.y > topRightBoundary.y) {
+					newCameraPosition.y += player.transform.position.y - topRightBoundary.y;
+				}
 			}
-			if(player.transform.position.y > topRightBoundary.y) {
-				newCameraPosition.y += player.transform.position.y - topRightBoundary.y;
-			}
+
 		} else {
 			if(player.transform.position.x < (bottomLeftBoundary.x + _player_size)) {
 				player.transform.position = new Vector3((bottomLeftBoundary.x + _player_size), player.transform.position.y, player.transform.position.z);
