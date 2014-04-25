@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\LevelEndTrigger.cs" />
      <Compile Include="Assets\Scripts\MainMenuLayout.cs" />
      <Compile Include="Assets\Scripts\RotateCrystal.cs" />
+     <None Include="Assets\Materials\greyScale.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

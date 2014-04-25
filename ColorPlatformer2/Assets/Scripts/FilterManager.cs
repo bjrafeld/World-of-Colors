@@ -7,15 +7,18 @@ public class FilterManager : MonoBehaviour {
 	private const int COLOR2 = 1;
 	private const int COLOR3 = 2;
 
-	public int startColor = 0;
+	public int startColor;
 
-	public string colorTag1;
+    public Material filterShader;
+    public Material defaultShader;
+
+    public string colorTag1;
 	public string colorTag2;
 	public string colorTag3;
 
 	private string activeFilter;
     private BoxCollider2D[] _platforms;
-
+    private SpriteRenderer[] _sprites;
 	//For no assets
 	private Color activeColor;
 
@@ -24,16 +27,23 @@ public class FilterManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        startColor = 0;
 		SetColorFilter(startColor);
 	}
 
     void Awake()
     {
         _platforms = GetComponentsInChildren<BoxCollider2D>();
+        _sprites = new SpriteRenderer[_platforms.Length];
+        for (int i = 0; i < _platforms.Length; i++)
+        {
+            _sprites[i] = _platforms[i].GetComponent<SpriteRenderer>();
+            _sprites[i].sortingOrder = 1;
+        }
     }
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.A) || Input.GetAxis("Blue") != 0) {
+		if(Input.GetKeyDown(KeyCode.A) || Input.GetButtonDown("Blue")) {
  
             if (startColor == 0)
             {
@@ -46,7 +56,7 @@ public class FilterManager : MonoBehaviour {
             SetColorFilter((startColor % 3)); 
 		} /*else if (Input.GetKeyDown(KeyCode.S) || Input.GetAxis("Red") != 0) {
 			SetColorFilter(COLOR2);
-		} */else if (Input.GetKeyDown(KeyCode.D) || Input.GetAxis("Yellow") != 0) {
+		} */else if (Input.GetKeyDown(KeyCode.D) || Input.GetButtonDown("Yellow")) {
             startColor += 1;
             SetColorFilter((startColor % 3));
         }
@@ -62,15 +72,20 @@ public class FilterManager : MonoBehaviour {
 			activeFilter = colorTag3;
 		}
 
-		foreach(BoxCollider2D platform in _platforms) {
-            SpriteRenderer render = platform.gameObject.GetComponent<SpriteRenderer>();
+		for(int i = 0; i < _platforms.Length; i++) {
+            BoxCollider2D platform = _platforms[i];
+            SpriteRenderer render = _sprites[i];
 			if (platform.tag == activeFilter) {
-				render.color = Color.white;
-				platform.enabled = true;
+				//render.color = Color.white;
+                render.material = defaultShader;
+                render.sortingOrder = 0;
+                platform.enabled = true;
 			} else {
-				Color transparent = Color.white;
-				transparent.a = transparency;
-				render.color = transparent;
+				//Color transparent = Color.white;
+				//transparent.a = transparency;
+				//render.color = transparent;
+                render.material = filterShader;
+                render.sortingOrder = 0;
 				platform.enabled = false;
 			}
 		}
