@@ -169,7 +169,7 @@ public class CharacterPhysics: MonoBehaviour
         }
 
         // jump
-        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow) || Input.GetAxis("Jump") != 0 || Input.GetAxis("JumpAxis") > 0)
+        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow) || Input.GetAxis("Jump") != 0) // || Input.GetAxis("JumpAxis") > 0)
         {
             currentInputState = inputState.Jump;
             if (grounded)

@@ -23,11 +23,23 @@ public class FilterManager : MonoBehaviour {
 	private Color activeColor;
 
 	public float transparency = 0.3f;
-	
+
+	//Used for spawning on filtering
+	public TriggerSpawner spawner;
+	public string spawnColor;
+	public bool weightSpawnColor = false;
+
+	public TriggerSpawner spawner2;
+	public string spawnColor2;
+	public bool weightSpawnColor2 = false;
+
+	public TriggerSpawner spawner3;
+	public string spawnColor3;
+	public bool weightSpawnColor3 = false;
 
 	// Use this for initialization
 	void Start () {
-        startColor = 0;
+        startColor = startColor;
 		SetColorFilter(startColor);
 	}
 
@@ -70,6 +82,24 @@ public class FilterManager : MonoBehaviour {
 			activeFilter = colorTag2;
 		} else if (color == COLOR3) {
 			activeFilter = colorTag3;
+		}
+
+		if(weightSpawnColor) {
+			if(activeFilter == spawnColor) {
+				spawner.spawnWeight();
+			}
+		}
+
+		if(weightSpawnColor2) {
+			if(activeFilter == spawnColor2) {
+				spawner2.spawnWeight();
+			}
+		}
+
+		if(weightSpawnColor3) {
+			if(activeFilter == spawnColor3) {
+				spawner3.spawnWeight();
+			}
 		}
 
 		for(int i = 0; i < _platforms.Length; i++) {

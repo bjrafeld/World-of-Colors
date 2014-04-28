@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\LevelEndTrigger.cs" />
      <Compile Include="Assets\Scripts\MainMenuLayout.cs" />
      <Compile Include="Assets\Scripts\RotateCrystal.cs" />
+     <Compile Include="Assets\Scripts\TriggerSpawner.cs" />
      <Compile Include="Assets\Scripts\WeightSpawn.cs" />
      <None Include="Assets\Materials\greyScale.shader" />
   </ItemGroup>

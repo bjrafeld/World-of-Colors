@@ -1,13 +1,16 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CameraMovement.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\WeightSpawn.cs">
     <Files>
+      <File FileName="Assets\Scripts\FilterManager.cs" Line="36" Column="29" />
       <File FileName="Assets\Scripts\CameraMovement.cs" Line="12" Column="2" />
-      <File FileName="Assets\Scripts\FilterManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\CharacterPhysics.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\CharacterPhysics.cs" Line="195" Column="1" />
       <File FileName="Assets\Scripts\MainMenuLayout.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\RotateCrystal.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Colorizer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\DestroyOffScreen.cs" Line="17" Column="1" />
+      <File FileName="Assets\Scripts\FilterTrigger.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\WeightSpawn.cs" Line="21" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

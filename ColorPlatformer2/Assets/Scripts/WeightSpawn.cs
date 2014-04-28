@@ -17,7 +17,6 @@ public class WeightSpawn : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log (weight);
 		if (weight == null) {
 			spawnWeight();
 		}
