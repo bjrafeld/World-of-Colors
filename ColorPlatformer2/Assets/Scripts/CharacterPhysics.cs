@@ -42,6 +42,8 @@ public class CharacterPhysics: MonoBehaviour
 
 	private bool paused = false;
 
+	public bool movementFrozen = false;
+
 	
 	public virtual void Awake()
 	{
@@ -143,14 +145,16 @@ public class CharacterPhysics: MonoBehaviour
         {
             currentInputState = inputState.WalkLeft;
             facingDir = facing.Left;
-            if (leftStick)
-            {
-                physVel.x = runVel * hor;
-            }
-            else
-            {
-                physVel.x = -runVel;
-            }
+	        if(!movementFrozen) {    
+				if (leftStick)
+	            {
+	                physVel.x = runVel * hor;
+	            }
+	            else
+	            {
+	                physVel.x = -runVel;
+	            }
+			}
         }
 
         // move right
@@ -158,26 +162,30 @@ public class CharacterPhysics: MonoBehaviour
         {
             currentInputState = inputState.WalkRight;
             facingDir = facing.Right;
-            if (rightStick)
-            {
-                physVel.x = runVel * hor;
-            }
-            else
-            {
-                physVel.x = runVel;
-            }
+			if(!movementFrozen) {
+	            if (rightStick)
+	            {
+	                physVel.x = runVel * hor;
+	            }
+	            else
+	            {
+	                physVel.x = runVel;
+	            }
+			}
         }
 
         // jump
-        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow) || Input.GetAxis("Jump") != 0) // || Input.GetAxis("JumpAxis") > 0)
-        {
-            currentInputState = inputState.Jump;
-            if (grounded)
-            {
-                _rigidbody.velocity = new Vector2(physVel.x, jumpVel);
-                grounded = false;
-            }
-        }
+		if(!movementFrozen) {
+	        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow) || Input.GetAxis("Jump") != 0) // || Input.GetAxis("JumpAxis") > 0)
+	        {
+	            currentInputState = inputState.Jump;
+	            if (grounded)
+	            {
+	                _rigidbody.velocity = new Vector2(physVel.x, jumpVel);
+	                grounded = false;
+	            }
+	        }
+		}
 
         if (currentInputState != inputState.Jump && hor == 0)
         {

@@ -17,6 +17,7 @@ public class FilterManager : MonoBehaviour {
 	public string colorTag3;
 
 	private string activeFilter;
+	private string lastActiveFilter;
     private BoxCollider2D[] _platforms;
     private SpriteRenderer[] _sprites;
 	//For no assets
@@ -37,8 +38,12 @@ public class FilterManager : MonoBehaviour {
 	public string spawnColor3;
 	public bool weightSpawnColor3 = false;
 
+	private CharacterPhysics _player;
+
 	// Use this for initialization
 	void Start () {
+		_player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterPhysics>() as CharacterPhysics;
+
         startColor = startColor;
 		SetColorFilter(startColor);
 	}
@@ -76,6 +81,8 @@ public class FilterManager : MonoBehaviour {
 
 	public void SetColorFilter(int color) {
 
+		lastActiveFilter = activeFilter;
+
 		if(color == COLOR1) {
 			activeFilter = colorTag1;
 		} else if (color == COLOR2) {
@@ -102,6 +109,10 @@ public class FilterManager : MonoBehaviour {
 			}
 		}
 
+		if(lastActiveFilter == "neon_red_ground") {
+			_player.movementFrozen = false;
+		}
+
 		for(int i = 0; i < _platforms.Length; i++) {
             BoxCollider2D platform = _platforms[i];
             SpriteRenderer render = _sprites[i];
@@ -117,6 +128,12 @@ public class FilterManager : MonoBehaviour {
                 render.material = filterShader;
                 render.sortingOrder = 0;
 				platform.enabled = false;
+			}
+
+			if(lastActiveFilter == "neon_blue_ground") {
+				if(platform.tag == "neon_blue_ground") {
+					platform.GetComponent<BlueGate>().TriggerOff();
+				}
 			}
 		}
 	}
