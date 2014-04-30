@@ -5,14 +5,14 @@ public class PortalTrigger : MonoBehaviour {
 
 	private GameObject player;
 
-	public bool portalTriggered = false;
+	private bool portalTriggered = false;
 
 	private GameObject xButton;
 	public GameObject buttonPrefab;
 
 	public float heightAbove = 1f;
 
-	public float alphaChangeRate = 0.1f;
+	private float alphaChangeRate = 0.1f;
 
 	private SpriteRenderer buttonColor;
 
