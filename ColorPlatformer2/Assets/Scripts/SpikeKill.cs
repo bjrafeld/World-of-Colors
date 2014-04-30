@@ -15,6 +15,8 @@ public class SpikeKill : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D col) {
 		if(col.gameObject.tag == "Player") {
+			//Kill Animation
+			//Reset Level
 			col.gameObject.collider2D.enabled = false;
 		}
 	}
