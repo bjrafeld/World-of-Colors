@@ -27,13 +27,15 @@ public class PortalTrigger : MonoBehaviour {
 	void Update () {
 		if (portalTriggered) {
 			FadeInButton();
+		} else {
+			FadeOutButton();
+		}
+
+		if(xButton != null) {
 			if(Input.GetAxis("Red") != 0 || Input.GetKeyDown(KeyCode.X)) {
 				//Exit Animation
 				Application.LoadLevel(nextLevel);
 			}
-
-		} else {
-			FadeOutButton();
 		}
 	}
 
@@ -88,7 +90,7 @@ public class PortalTrigger : MonoBehaviour {
 				Destroy(xButton);
 			} else {
 				Color newAlpha = buttonColor.color;
-				newAlpha.a = newAlpha.a - (( alphaChangeRate) * Time.deltaTime);
+				newAlpha.a = newAlpha.a - ((2 * alphaChangeRate) * Time.deltaTime);
 				buttonColor.color = newAlpha;
 			}
 		}
