@@ -12,7 +12,7 @@ public class PortalTrigger : MonoBehaviour {
 
 	public float heightAbove = 1f;
 
-	private float alphaChangeRate = 0.1f;
+	private float alphaChangeRate = 0.75f;
 
 	private SpriteRenderer buttonColor;
 
