@@ -23,6 +23,7 @@ public class CharacterPhysics: MonoBehaviour
 
 	protected Transform _transform;
 	protected Rigidbody2D _rigidbody;
+    protected Animator _anim;
 	
 	// edit these to tune character movement	
 	public float runVel = 2.5f; 	// run speed
@@ -49,6 +50,7 @@ public class CharacterPhysics: MonoBehaviour
 	{
 		_transform = transform;
 		_rigidbody = rigidbody2D;
+        _anim = GetComponent<Animator>();
         groundCheck = transform.Find("groundCheck");
         groundCheck1 = transform.Find("groundCheck1");
         groundCheck2 = transform.Find("groundCheck2");
@@ -141,7 +143,7 @@ public class CharacterPhysics: MonoBehaviour
 
         
         // move left
-        if (Input.GetKey(KeyCode.LeftArrow) || leftStick)
+        if (Input.GetKey(KeyCode.LeftArrow) || leftStick && currentInputState != inputState.WalkRight)
         {
             currentInputState = inputState.WalkLeft;
             facingDir = facing.Left;
@@ -187,9 +189,21 @@ public class CharacterPhysics: MonoBehaviour
 	        }
 		}
 
-        if (currentInputState != inputState.Jump && hor == 0)
+        if (currentInputState != inputState.Jump)
         {
-            currentInputState = inputState.None;
+            if (physVel.x == 0)
+            {
+                currentInputState = inputState.None;
+                _anim.SetInteger("state", 0);
+            } 
+            else if (physVel.x > 0) 
+            {
+                _anim.SetInteger("state", 1);
+            }
+            else if (physVel.x < 0)
+            {
+                _anim.SetInteger("state", 3);
+            }
         }
 
     }
