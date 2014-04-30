@@ -16,6 +16,8 @@ public class PortalTrigger : MonoBehaviour {
 
 	private SpriteRenderer buttonColor;
 
+	public string nextLevel;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -25,6 +27,11 @@ public class PortalTrigger : MonoBehaviour {
 	void Update () {
 		if (portalTriggered) {
 			FadeInButton();
+			if(Input.GetAxis("Red") != 0 || Input.GetKeyDown(KeyCode.X)) {
+				//Exit Animation
+				Application.LoadLevel(nextLevel);
+			}
+
 		} else {
 			FadeOutButton();
 		}
