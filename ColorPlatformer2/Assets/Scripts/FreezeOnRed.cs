@@ -21,5 +21,9 @@ public class FreezeOnRed : MonoBehaviour {
 		if(col.gameObject.tag == "Player") {
 			_player.movementFrozen = true;
 		}
+
+		if(col.gameObject.tag == "weight") {
+			//Do swomething to the weight
+		}
 	}
 }
