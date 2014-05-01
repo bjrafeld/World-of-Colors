@@ -61,6 +61,7 @@
      <Compile Include="Assets\Scripts\LevelEndTrigger.cs" />
      <Compile Include="Assets\Scripts\MainMenuLayout.cs" />
      <Compile Include="Assets\Scripts\MainMenuStart.cs" />
+     <Compile Include="Assets\Scripts\ParticlesReturn.cs" />
      <Compile Include="Assets\Scripts\PortalTrigger.cs" />
      <Compile Include="Assets\Scripts\PowerOfFiltering.cs" />
      <Compile Include="Assets\Scripts\RotateCrystal.cs" />
