@@ -15,32 +15,47 @@ public class PortalTrigger : MonoBehaviour {
 	private float alphaChangeRate = 0.75f;
 
 	private SpriteRenderer buttonColor;
+	private RotatePortal _portal;
+	private LevelEndAnimation _endAnim;
+
+	public float topSpeedPortal = 20f;
+	private float normalSpeedPortal;
 
 	public string nextLevel;
 
+	private bool animationNotStarted = true;
+
 	// Use this for initialization
 	void Start () {
-	
+		_portal = this.gameObject.GetComponent<RotatePortal>();
+		_endAnim = this.gameObject.GetComponent<LevelEndAnimation>();
+		this.normalSpeedPortal = _portal.rotationSpeed;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (portalTriggered) {
-			FadeInButton();
-		} else {
-			FadeOutButton();
-		}
+		if(animationNotStarted) {
+			if (portalTriggered) {
+				FadeInButton();
+			} else {
+				FadeOutButton();
+			}
 
-		if(xButton != null) {
-			if(Input.GetAxis("Red") != 0 || Input.GetKeyDown(KeyCode.X)) {
-				//Exit Animation
-				Application.LoadLevel(nextLevel);
+			if(xButton != null) {
+				if(Input.GetAxis("Red") != 0 || Input.GetKeyDown(KeyCode.X)) {
+					animationNotStarted = false;
+					Destroy (xButton);
+					_endAnim.StartAnimation(player);
+				}
 			}
 		}
 	}
 
 	void OnTriggerEnter2D(Collider2D col) {
 		if(col.gameObject.tag == "Player") {
+			if(animationNotStarted) {
+				_portal.setSpeedUp(topSpeedPortal);
+			}
 			player = col.gameObject;
 			portalTriggered = true;
 			if(xButton == null) {
@@ -51,6 +66,9 @@ public class PortalTrigger : MonoBehaviour {
 
 	void OnTriggerExit2D(Collider2D col) {
 		if(col.gameObject.tag == "Player") {
+			if(animationNotStarted) {
+				_portal.setSlowDown(normalSpeedPortal);
+			}
 			portalTriggered = false;
 		}
 	}
