@@ -1,19 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\RotatePortal.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MainMenuStart.cs">
     <Files>
-      <File FileName="Assets\Scripts\RotatePortal.cs" Line="30" Column="40" />
-      <File FileName="Assets\Scripts\PortalTrigger.cs" Line="60" Column="17" />
-      <File FileName="Assets\Scripts\FreezeOnRed.cs" Line="28" Column="3" />
-      <File FileName="Assets\Scripts\CameraMovement.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\CharacterPhysics.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\FilterTrigger.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\FilterManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\LevelEndTrigger.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\DestroyOffScreen.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Colorizer.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\BlueGate.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\SpikeKill.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MainMenuStart.cs" Line="8" Column="28" />
+      <File FileName="Assets\Scripts\CrystalSpawnAndCollect.cs" Line="17" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

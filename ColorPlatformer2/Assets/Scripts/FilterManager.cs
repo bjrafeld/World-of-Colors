@@ -39,10 +39,16 @@ public class FilterManager : MonoBehaviour {
 	public bool weightSpawnColor3 = false;
 
 	private CharacterPhysics _player;
+	private Rigidbody2D _playerRigidBody;
+	private float oldGravity;
+
+	public static bool powerToFilter = false;
 
 	// Use this for initialization
 	void Start () {
 		_player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterPhysics>() as CharacterPhysics;
+		_playerRigidBody = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>() as Rigidbody2D;
+		oldGravity = _playerRigidBody.gravityScale;
 
         startColor = startColor;
 		SetColorFilter(startColor);
@@ -60,23 +66,25 @@ public class FilterManager : MonoBehaviour {
     }
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.A) || Input.GetButtonDown("Blue")) {
- 
-            if (startColor == 0)
-            {
-                startColor = 2;
-            }
-            else
-            {
-                startColor -= 1;
-            }
-            SetColorFilter((startColor % 3)); 
-		} /*else if (Input.GetKeyDown(KeyCode.S) || Input.GetAxis("Red") != 0) {
-			SetColorFilter(COLOR2);
-		} */else if (Input.GetKeyDown(KeyCode.D) || Input.GetButtonDown("Yellow")) {
-            startColor += 1;
-            SetColorFilter((startColor % 3));
-        }
+		if(powerToFilter) {
+			if(Input.GetKeyDown(KeyCode.A) || Input.GetButtonDown("Blue")) {
+	 
+	            if (startColor == 0)
+	            {
+	                startColor = 2;
+	            }
+	            else
+	            {
+	                startColor -= 1;
+	            }
+	            SetColorFilter((startColor % 3)); 
+			} /*else if (Input.GetKeyDown(KeyCode.S) || Input.GetAxis("Red") != 0) {
+				SetColorFilter(COLOR2);
+			} */else if (Input.GetKeyDown(KeyCode.D) || Input.GetButtonDown("Yellow")) {
+	            startColor += 1;
+	            SetColorFilter((startColor % 3));
+	        }
+		}
 	}
 
 	public void SetColorFilter(int color) {
@@ -111,6 +119,11 @@ public class FilterManager : MonoBehaviour {
 
 		if(lastActiveFilter == "neon_red_ground") {
 			_player.movementFrozen = false;
+			_playerRigidBody.gravityScale = oldGravity;
+			GameObject[] weights = GameObject.FindGameObjectsWithTag("weight") as GameObject[];
+			foreach (GameObject w in weights) {
+				w.GetComponent<FreezeWeight>().UnFreeze();
+			}
 		}
 
 		for(int i = 0; i < _platforms.Length; i++) {
