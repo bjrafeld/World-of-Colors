@@ -58,6 +58,7 @@
      <Compile Include="Assets\Scripts\MainMenuLayout.cs" />
      <Compile Include="Assets\Scripts\PortalTrigger.cs" />
      <Compile Include="Assets\Scripts\RotateCrystal.cs" />
+     <Compile Include="Assets\Scripts\RotatePortal.cs" />
      <Compile Include="Assets\Scripts\SpikeKill.cs" />
      <Compile Include="Assets\Scripts\TriggerSpawner.cs" />
      <Compile Include="Assets\Scripts\WeightSpawn.cs" />

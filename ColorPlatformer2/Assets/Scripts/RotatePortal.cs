@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RotateCrystal : MonoBehaviour {
+public class RotatePortal : MonoBehaviour {
 
 	public float rotationSpeed = 1f;
 
@@ -12,6 +12,6 @@ public class RotateCrystal : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.Rotate(Vector3.up, rotationSpeed*Time.deltaTime, Space.World);
+		transform.Rotate(Vector3.back, rotationSpeed*Time.deltaTime, Space.Self);
 	}
 }
