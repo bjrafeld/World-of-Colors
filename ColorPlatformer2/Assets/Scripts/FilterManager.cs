@@ -42,7 +42,9 @@ public class FilterManager : MonoBehaviour {
 	private Rigidbody2D _playerRigidBody;
 	private float oldGravity;
 
-	public static bool powerToFilter = false;
+
+	//MAKE SURE TO CHANGE
+	public static bool powerToFilter = true;
 
 	// Use this for initialization
 	void Start () {

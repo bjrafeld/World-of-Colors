@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\CharacterPhysics.cs" />
      <Compile Include="Assets\Scripts\Colorizer.cs" />
      <Compile Include="Assets\Scripts\ConstantRotation.cs" />
+     <Compile Include="Assets\Scripts\CrystalBobbing.cs" />
      <Compile Include="Assets\Scripts\CrystalSpawnAndCollect.cs" />
      <Compile Include="Assets\Scripts\DestroyOffScreen.cs" />
      <Compile Include="Assets\Scripts\FilterManager.cs" />
