@@ -6,6 +6,8 @@ public class WeightSpawn : MonoBehaviour {
 	//Script for the Spawner Empty Object
 
 	public GameObject weightPrefab;
+	private int numAlive = 0;
+	public int maxAlive = 4;
 
 	private GameObject weight;
 	
@@ -23,6 +25,16 @@ public class WeightSpawn : MonoBehaviour {
 	}
 
 	public void spawnWeight() {
-		weight = Instantiate(weightPrefab, transform.position, transform.rotation) as GameObject;
+		if(numAlive < maxAlive) {
+			weight = Instantiate(weightPrefab, transform.position, transform.rotation) as GameObject;
+			weight.GetComponent<DestroyOffScreen>().SetSpawner(this.gameObject);
+			numAlive++;
+		}
 	}
+
+	public void weightDestroyed() {
+		numAlive--;
+	}
+
+
 }

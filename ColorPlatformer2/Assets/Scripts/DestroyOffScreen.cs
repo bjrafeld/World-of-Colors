@@ -3,6 +3,9 @@ using System.Collections;
 
 public class DestroyOffScreen : MonoBehaviour {
 
+	private WeightSpawn spawner;
+	private TriggerSpawner tSpawner;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -15,10 +18,20 @@ public class DestroyOffScreen : MonoBehaviour {
 
 	public void OnBecameInvisible() {
 		Vector3 top = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height, 0));
-		Debug.Log ("I'm the invisible woman!");
 		if(this.transform.position.y < top.y) {
-			Debug.Log ("I'm the Invisible Woman, and I'm about to be destroyed!");
+			if(spawner != null) {
+				spawner.weightDestroyed();
+			} else {
+				tSpawner.weightDestroyed();
+			}
 			Destroy(this.gameObject);
+		}
+	}
+
+	public void SetSpawner(GameObject spawn) {
+		spawner = spawn.GetComponent<WeightSpawn>();
+		if (spawner == null) {
+			tSpawner = spawn.GetComponent<TriggerSpawner>();
 		}
 	}
 }

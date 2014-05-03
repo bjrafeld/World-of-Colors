@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\CameraMovement.cs" />
      <Compile Include="Assets\Scripts\CharacterPhysics.cs" />
      <Compile Include="Assets\Scripts\Colorizer.cs" />
+     <Compile Include="Assets\Scripts\ConstantDown.cs" />
      <Compile Include="Assets\Scripts\ConstantRotation.cs" />
      <Compile Include="Assets\Scripts\CrystalBobbing.cs" />
      <Compile Include="Assets\Scripts\CrystalSpawnAndCollect.cs" />
@@ -73,6 +74,7 @@
      <Compile Include="Assets\Scripts\SpikeKill.cs" />
      <Compile Include="Assets\Scripts\TriggerSpawner.cs" />
      <Compile Include="Assets\Scripts\WeightSpawn.cs" />
+     <Compile Include="Assets\Scripts\YellowBounce.cs" />
      <None Include="Assets\Materials\blueShade.shader" />
      <None Include="Assets\Materials\greyScale.shader" />
   </ItemGroup>

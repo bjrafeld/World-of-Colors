@@ -6,10 +6,12 @@ public class TriggerSpawner : MonoBehaviour {
 	//Script for the Spawner Empty Object
 	
 	public GameObject weightPrefab;
+	private int numAlive = 0;
+	public int maxAlive = 4;
 	
 	private GameObject weight;
 	
-	public bool spawnOnStart = true;
+	public bool spawnOnStart;
 	
 	
 	// Use this for initialization
@@ -18,10 +20,22 @@ public class TriggerSpawner : MonoBehaviour {
 			spawnWeight();
 		}
 	}
-	
+
 	// Update is called once per frame
+	void Update () {
+	
+	}
 	
 	public void spawnWeight() {
-		weight = Instantiate(weightPrefab, transform.position, transform.rotation) as GameObject;
+		if(numAlive < maxAlive) {
+			weight = Instantiate(weightPrefab, transform.position, transform.rotation) as GameObject;
+			weight.GetComponent<DestroyOffScreen>().SetSpawner(this.gameObject);
+			numAlive++;
+		}
 	}
+	
+	public void weightDestroyed() {
+		numAlive--;
+	}
+
 }

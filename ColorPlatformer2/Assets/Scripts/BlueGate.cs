@@ -19,31 +19,44 @@ public class BlueGate : MonoBehaviour {
 	private Vector3 _bluePosition;
 	private Vector3 _affectedPosition;
 
+	private bool gate = false;
+
 	// Use this for initialization
 	void Awake () {
-		_bluePosition = this.transform.position;
-		_affectedPosition = affectedObject.transform.position;
+		if(affectedObject != null) {
+			gate = true;
+		}
+		if(gate) {
+			_bluePosition = this.transform.position;
+			_affectedPosition = affectedObject.transform.position;
+		}
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(triggered) {
-			MoveSelf();
-			MoveAffected();
-		} else {
-			ReturnSelf();
-			ReturnAffected();
+		if(gate) {
+			if(triggered) {
+				MoveSelf();
+				MoveAffected();
+			} else {
+				Debug.Log ("Returning back..");
+				ReturnSelf();
+				ReturnAffected();
+			}
 		}
 	}
 
-	void OnCollisionEnter2D(Collision2D col) {
+	void OnCollisionStay2D(Collision2D col) {
 		if(col.gameObject.tag == "weight") {
+			Debug.Log ("Triggered on");
 			triggered = true;
 		}
 	}
 
 	void OnCollisionExit2D(Collision2D col) {
 		if(col.gameObject.tag == "weight") {
+			Debug.Log ("Triggered off");
 			triggered = false;
 		}
 	}
@@ -65,27 +78,31 @@ public class BlueGate : MonoBehaviour {
 		if (affectedDirection == Direction.Down) {
 			if (affectedObject.transform.position.y > (_affectedPosition.y - affectedMovementAmount)) {
 				affectedObject.transform.position = new Vector3(affectedObject.transform.position.x, (affectedObject.transform.position.y) - (affectedMovementSpeed*Time.deltaTime));
-			} else if (affectedObject.transform.position.y < (_affectedPosition.y - movementAmount)) {
+			} else if (affectedObject.transform.position.y <= (_affectedPosition.y - movementAmount)) {
 				affectedObject.transform.position = new Vector3(affectedObject.transform.position.x, _affectedPosition.y - affectedMovementAmount);
 			}
 		} else if (affectedDirection == Direction.Up) {
 			if (affectedObject.transform.position.y < (_affectedPosition.y + affectedMovementAmount)) {
 				affectedObject.transform.position = new Vector3(affectedObject.transform.position.x, (affectedObject.transform.position.y) + (affectedMovementSpeed*Time.deltaTime));
-			} else if (affectedObject.transform.position.y > (_affectedPosition.y + affectedMovementAmount)) {
+			} else if (affectedObject.transform.position.y >= (_affectedPosition.y + affectedMovementAmount)) {
 				affectedObject.transform.position = new Vector3(affectedObject.transform.position.x, _affectedPosition.y + affectedMovementAmount);
 			}
 		} else if (affectedDirection == Direction.Left) {
 			if (affectedObject.transform.position.x > (_affectedPosition.x - affectedMovementAmount)) {
 				affectedObject.transform.position = new Vector3((affectedObject.transform.position.x) - (affectedMovementSpeed*Time.deltaTime), affectedObject.transform.position.y);
-			} else if (affectedObject.transform.position.x < (_affectedPosition.x - movementAmount)) {
+			} else if (affectedObject.transform.position.x <= (_affectedPosition.x - movementAmount)) {
 				affectedObject.transform.position = new Vector3(_affectedPosition.x - affectedMovementAmount, affectedObject.transform.position.y);
 			}
 		} else if (affectedDirection == Direction.Right) {
 			if (affectedObject.transform.position.x < (_affectedPosition.x + affectedMovementAmount)) {
 				affectedObject.transform.position = new Vector3((affectedObject.transform.position.x) + (affectedMovementSpeed*Time.deltaTime), affectedObject.transform.position.y );
-			} else if (affectedObject.transform.position.x > (_affectedPosition.x + affectedMovementAmount)) {
+			} else if (affectedObject.transform.position.x >= (_affectedPosition.x + affectedMovementAmount)) {
 				affectedObject.transform.position = new Vector3(_affectedPosition.x + affectedMovementAmount, affectedObject.transform.position.y);
 			}
+		}
+
+		if(affectedObject.GetComponent<ConstantDown>() != null) {
+			affectedObject.GetComponent<ConstantDown>().triggerOff();
 		}
 	}
 
@@ -101,25 +118,25 @@ public class BlueGate : MonoBehaviour {
 		if (affectedDirection == Direction.Up) {
 			if (affectedObject.transform.position.y > (_affectedPosition.y)) {
 				affectedObject.transform.position = new Vector3(affectedObject.transform.position.x, (affectedObject.transform.position.y) - (affectedMovementSpeed*Time.deltaTime));
-			} else if (affectedObject.transform.position.y < (_affectedPosition.y)) {
+			} else if (affectedObject.transform.position.y <= (_affectedPosition.y)) {
 				affectedObject.transform.position = new Vector3(affectedObject.transform.position.x, _affectedPosition.y);
 			}
 		} else if (affectedDirection == Direction.Down) {
 			if (affectedObject.transform.position.y < (_affectedPosition.y)) {
 				affectedObject.transform.position = new Vector3(affectedObject.transform.position.x, (affectedObject.transform.position.y) + (affectedMovementSpeed*Time.deltaTime));
-			} else if (affectedObject.transform.position.y > (_affectedPosition.y)) {
+			} else if (affectedObject.transform.position.y >= (_affectedPosition.y)) {
 				affectedObject.transform.position = new Vector3(affectedObject.transform.position.x, _affectedPosition.y);
 			}
 		} else if (affectedDirection == Direction.Right) {
 			if (affectedObject.transform.position.x > (_affectedPosition.x)) {
 				affectedObject.transform.position = new Vector3((affectedObject.transform.position.x) - (affectedMovementSpeed*Time.deltaTime), affectedObject.transform.position.y);
-			} else if (affectedObject.transform.position.x < (_affectedPosition.x)) {
+			} else if (affectedObject.transform.position.x <= (_affectedPosition.x)) {
 				affectedObject.transform.position = new Vector3(_affectedPosition.x, affectedObject.transform.position.y);
 			}
 		} else if (affectedDirection == Direction.Left) {
 			if (affectedObject.transform.position.x < (_affectedPosition.x)) {
 				affectedObject.transform.position = new Vector3((affectedObject.transform.position.x) + (affectedMovementSpeed*Time.deltaTime), affectedObject.transform.position.y );
-			} else if (affectedObject.transform.position.x > (_affectedPosition.x)) {
+			} else if (affectedObject.transform.position.x >= (_affectedPosition.x)) {
 				affectedObject.transform.position = new Vector3(_affectedPosition.x, affectedObject.transform.position.y);
 			}
 		}

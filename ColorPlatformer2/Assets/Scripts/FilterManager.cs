@@ -79,12 +79,16 @@ public class FilterManager : MonoBehaviour {
 	            {
 	                startColor -= 1;
 	            }
-	            SetColorFilter((startColor % 3)); 
+				
+				startColor = startColor % 3;
+				SetColorFilter((startColor)); 
 			} /*else if (Input.GetKeyDown(KeyCode.S) || Input.GetAxis("Red") != 0) {
 				SetColorFilter(COLOR2);
 			} */else if (Input.GetKeyDown(KeyCode.D) || Input.GetButtonDown("Yellow")) {
 	            startColor += 1;
-	            SetColorFilter((startColor % 3));
+				
+				startColor = startColor % 3;
+				SetColorFilter((startColor)); 
 	        }
 		}
 	}
@@ -120,6 +124,7 @@ public class FilterManager : MonoBehaviour {
 		}
 
 		if(lastActiveFilter == "neon_red_ground") {
+			_player.gameObject.GetComponent<FreezeWeight>().UnFreeze();
 			_player.movementFrozen = false;
 			_playerRigidBody.gravityScale = oldGravity;
 			GameObject[] weights = GameObject.FindGameObjectsWithTag("weight") as GameObject[];
@@ -147,7 +152,10 @@ public class FilterManager : MonoBehaviour {
 
 			if(lastActiveFilter == "neon_blue_ground") {
 				if(platform.tag == "neon_blue_ground") {
-					platform.GetComponent<BlueGate>().TriggerOff();
+					BlueGate gate = platform.GetComponent<BlueGate>();
+					if(gate != null) {
+						gate.TriggerOff();
+					}
 				}
 			}
 		}
