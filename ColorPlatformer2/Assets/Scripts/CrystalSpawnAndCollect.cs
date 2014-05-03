@@ -28,6 +28,7 @@ public class CrystalSpawnAndCollect : MonoBehaviour {
 				GameObject particle = Instantiate(shardParticles, this.transform.position, rotation) as GameObject;
 				particle.rigidbody2D.AddForce(new Vector3(Random.Range (-359, 359), Random.Range (-359, 359), 0) * explosionForce);
 			}
+			PlayerPrefs.SetInt(Application.loadedLevelName + "_crystal", 1);
 			Destroy(this.gameObject);
 		}
 	}

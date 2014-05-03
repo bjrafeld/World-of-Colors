@@ -1,26 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\FilterManager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PortalTrigger.cs">
     <Files>
-      <File FileName="Assets\Scripts\MainMenuStart.cs" Line="8" Column="28" />
-      <File FileName="Assets\Scripts\CrystalSpawnAndCollect.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\SaveLevel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\ParticlesReturn.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\FilterManager.cs" Line="154" Column="79" />
-      <File FileName="Assets\Scripts\CrystalBobbing.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PowerOfFiltering.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\BlueGate.cs" Line="50" Column="22" />
-      <File FileName="Assets\Scripts\DialogueImpl.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\PortalTrigger.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\DialogueTrigger.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\SpikeKill.cs" Line="19" Column="17" />
-      <File FileName="Assets\Scripts\CameraMovement.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\LevelEndAnimation.cs" Line="91" Column="1" />
-      <File FileName="Assets\Scripts\WeightSpawn.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\DestroyOffScreen.cs" Line="34" Column="52" />
-      <File FileName="Assets\Scripts\TriggerSpawner.cs" Line="14" Column="26" />
-      <File FileName="Assets\Scripts\YellowBounce.cs" Line="34" Column="83" />
-      <File FileName="Assets\Scripts\FreezeWeight.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\LevelBeginAnimation.cs" Line="51" Column="75" />
+      <File FileName="Assets\Scripts\RotatePortal.cs" Line="39" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

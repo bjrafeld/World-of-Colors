@@ -28,9 +28,8 @@ public class CameraMovement : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Awake () {
-		player = Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation) as GameObject;
-
+	void Start () {
+		player = GameObject.FindGameObjectWithTag("Player");
 		_player_size = player.transform.localScale.x/2;
 
 	}

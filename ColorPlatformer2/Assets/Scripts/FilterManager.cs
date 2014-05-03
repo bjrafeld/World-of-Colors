@@ -54,6 +54,11 @@ public class FilterManager : MonoBehaviour {
 
         startColor = startColor;
 		SetColorFilter(startColor);
+		if(PlayerPrefs.GetInt("Filtering") == 1) {
+			powerToFilter = true;
+		} else if (PlayerPrefs.GetInt ("Filtering") == 0) {
+			powerToFilter = false;
+		}
 	}
 
     void Awake()

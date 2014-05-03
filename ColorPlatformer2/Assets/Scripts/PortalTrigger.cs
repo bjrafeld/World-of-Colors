@@ -25,6 +25,8 @@ public class PortalTrigger : MonoBehaviour {
 
 	private bool animationNotStarted = true;
 
+	public bool buttonFade = true;
+
 	// Use this for initialization
 	void Start () {
 		_portal = this.gameObject.GetComponent<RotatePortal>();
@@ -36,9 +38,13 @@ public class PortalTrigger : MonoBehaviour {
 	void Update () {
 		if(animationNotStarted) {
 			if (portalTriggered) {
-				FadeInButton();
+				if(buttonFade) {
+					FadeInButton();
+				}
 			} else {
-				FadeOutButton();
+				if(buttonFade) {
+					FadeOutButton();
+				}
 			}
 
 			if(xButton != null) {
@@ -59,7 +65,9 @@ public class PortalTrigger : MonoBehaviour {
 			player = col.gameObject;
 			portalTriggered = true;
 			if(xButton == null) {
-				CreateButton();
+				if(buttonFade) {
+					CreateButton();
+				}
 			}
 		}
 	}

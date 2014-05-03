@@ -59,6 +59,7 @@ public class LevelEndAnimation : MonoBehaviour {
 	public void StartAnimation(GameObject player) {
 		this.player = player;
 		this.player.GetComponent<CharacterPhysics>().movementFrozen = true;
+		this.player.rigidbody2D.gravityScale = 0;
 
 		this.min_Player_X = min_Player * player.transform.localScale.x;
 		this.min_Player_Y = min_Player * player.transform.localScale.y;

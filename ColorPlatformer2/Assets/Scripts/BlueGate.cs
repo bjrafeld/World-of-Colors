@@ -101,9 +101,6 @@ public class BlueGate : MonoBehaviour {
 			}
 		}
 
-		if(affectedObject.GetComponent<ConstantDown>() != null) {
-			affectedObject.GetComponent<ConstantDown>().triggerOff();
-		}
 	}
 
 	private void ReturnSelf() {

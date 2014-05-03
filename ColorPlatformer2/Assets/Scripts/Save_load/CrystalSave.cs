@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SaveLevel : MonoBehaviour {
+public class CrystalSave : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//Write last openbed level
-		//Write last opened portal
+		if(PlayerPrefs.GetInt(Application.loadedLevelName + "_crystal") == 1) {
+			Destroy (this.gameObject);
+		}
 	}
 	
 	// Update is called once per frame
