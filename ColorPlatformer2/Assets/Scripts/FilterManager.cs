@@ -47,7 +47,7 @@ public class FilterManager : MonoBehaviour {
 
 
 	//MAKE SURE TO CHANGE
-	public static bool powerToFilter = false;
+	public static bool powerToFilter = true;
 
 	// Use this for initialization
 	void Start () {
