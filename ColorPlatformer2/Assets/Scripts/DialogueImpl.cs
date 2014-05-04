@@ -7,6 +7,7 @@ public class DialogueImpl : MonoBehaviour {
 	private GameObject _player;
 	public GameObject buttonPrefab;
 	public DialogueImpl nextLine = null;
+	public ReturnCrystalTrigger triggerCrystal;
 
 	public GameObject portalSpawner;
 
@@ -21,6 +22,9 @@ public class DialogueImpl : MonoBehaviour {
 
 	private GameObject aButton;
 	public float timeBeforeButton = 0f;
+
+	public float timeBeforePortal = 3f;
+	public bool timeBefore = false;
 
 	// Use this for initialization
 	void Start () {
@@ -51,12 +55,24 @@ public class DialogueImpl : MonoBehaviour {
 				_player.GetComponent<FreezeWeight>().UnFreeze();
 				GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<LevelBeginAnimation>().RestoreGravity();
 				if(portalSpawner != null) {
-					portalSpawner.GetComponent<OpenPortal>().SpawnPortal();
+					if(timeBefore) {
+						timeBeforePortal -= Time.deltaTime;
+						if(timeBeforePortal <= 0) {
+							portalSpawner.GetComponent<OpenPortal>().SpawnPortal();
+							Destroy (this.gameObject);
+						}
+
+					} else {
+						portalSpawner.GetComponent<OpenPortal>().SpawnPortal();
+					}
+				}
+				if(triggerCrystal != null) {
+					triggerCrystal.TurnOn();
 				}
 			} else {
 				nextLine.StartAnim();
 			}
-			Destroy (this.gameObject);
+			//Destroy (this.gameObject);
 		}
 		
 	}

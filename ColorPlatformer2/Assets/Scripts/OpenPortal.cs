@@ -91,7 +91,7 @@ public class OpenPortal : MonoBehaviour {
 			portalDoneShrinking = true;
 			portalDoneGrowing = false;
 		}
-		portal.transform.localScale = Vector3.Lerp (portal.transform.localScale, new Vector3(min_Portal_X, min_Portal_Y, 1), Time.deltaTime*growSpeed);
+		portal.transform.localScale = Vector3.Lerp (portal.transform.localScale, new Vector3(normal_Portal_X, normal_Portal_Y, 1), Time.deltaTime*growSpeed);
 	}
 	
 	private void DestroyPortalUnfreezePlayer() {

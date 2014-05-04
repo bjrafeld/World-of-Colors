@@ -1,20 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/FilterManager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PortalTrigger.cs">
     <Files>
-      <File FileName="Assets/Scripts/FadeInStart.cs" Line="19" Column="13" />
-      <File FileName="Assets/Scripts/DialogueTrigger.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/FreezeWeight.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/CrystalSpawnAndCollect.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/CrystalBobbing.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/OpenPortal.cs" Line="28" Column="8" />
-      <File FileName="Assets/Scripts/LevelEndAnimation.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/LevelBeginAnimation.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/FadeInStart.cs" Line="19" Column="13" />
-      <File FileName="Assets/Scripts/FilterTrigger.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/FilterManager.cs" Line="60" Column="6" />
-      <File FileName="Assets/Scripts/PowerOfFiltering.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/CameraMovement.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\PortalTrigger.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\LevelBeginAnimation.cs" Line="93" Column="20" />
+      <File FileName="Assets\Scripts\RotatePortal.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\LevelEndAnimation.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

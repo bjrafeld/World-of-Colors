@@ -50,7 +50,7 @@ public class FilterManager : MonoBehaviour {
 	void Start () {
 		_player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterPhysics>() as CharacterPhysics;
 		_playerRigidBody = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>() as Rigidbody2D;
-		oldGravity = _playerRigidBody.gravityScale;
+		oldGravity = 10;
 
         startColor = startColor;
 		SetColorFilter(startColor);

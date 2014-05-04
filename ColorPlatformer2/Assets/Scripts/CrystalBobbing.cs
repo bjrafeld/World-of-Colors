@@ -18,10 +18,10 @@ public class CrystalBobbing : MonoBehaviour {
 		Vector3 pos = this.transform.position;
 		bottomPoint = pos;
 		bottomPoint.y -= heightBelow;
-
+		
 		topPoint = pos;
 		topPoint.y += heightAbove;
-
+		
 		topPointBuffer = topPoint;
 		topPointBuffer.y += .1f;
 		bottomPointBuffer = bottomPoint;
@@ -41,5 +41,19 @@ public class CrystalBobbing : MonoBehaviour {
 				movingUp = true;
 			}
 		}
+	}
+
+	public void Reset() {
+		Vector3 pos = this.transform.position;
+		bottomPoint = pos;
+		bottomPoint.y -= heightBelow;
+		
+		topPoint = pos;
+		topPoint.y += heightAbove;
+		
+		topPointBuffer = topPoint;
+		topPointBuffer.y += .1f;
+		bottomPointBuffer = bottomPoint;
+		bottomPointBuffer.y -= .1f;
 	}
 }
