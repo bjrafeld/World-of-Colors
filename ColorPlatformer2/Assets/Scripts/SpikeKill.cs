@@ -17,7 +17,7 @@ public class SpikeKill : MonoBehaviour {
 		if(col.gameObject.tag == "Player") {
 			//Kill Animation
 			//Reset Level
-			col.gameObject.collider2D.enabled = false;
+			col.gameObject.GetComponent<CharacterPhysics>().KillPlayer();
 		}
 	}
 }

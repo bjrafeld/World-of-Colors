@@ -205,4 +205,15 @@ public class CharacterPhysics: MonoBehaviour
 			grounded = true;
 		}*/
 	}
+
+	public void KillPlayer() {
+		//currentInputState = inputState.Death;
+
+		//Placeholder
+		this.gameObject.collider2D.enabled = false;
+		//this.rigidbody2D.gravityScale = 0;
+		//this.movementFrozen = true;
+
+		Application.LoadLevel(Application.loadedLevelName);
+	}
 }

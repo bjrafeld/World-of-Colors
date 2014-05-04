@@ -3,7 +3,7 @@ using System.Collections;
 
 public class LevelSave : MonoBehaviour {
 
-	public bool debug = true;
+	public bool debug = false;
 
 	// Use this for initialization
 	void Start () {
