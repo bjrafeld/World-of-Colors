@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class CharacterPhysics: MonoBehaviour 
@@ -66,37 +66,25 @@ public class CharacterPhysics: MonoBehaviour
 
 	}
 
-	public void OnGUI() {
-		if(paused) {
-			displayPauseMenu();
-		}
-	}
-
-	private void displayPauseMenu() {
-		float centerPointX = (Camera.main.pixelWidth/2 - buttonWidth);
-		float centerPointY = (0 + buttonHeight);
-		if(GUI.Button (new Rect((centerPointX - (1/2)*buttonWidth), centerPointY , buttonWidth, buttonHeight), "Main Menu")) {
-			Debug.Log ("Sandbox clicked");
-			Application.LoadLevel("Main_menu");
-		}
-	}
 
 	private void togglePause() {
+		PauseMenu menu = GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<PauseMenu>();
 		if(paused) {
-			Time.timeScale = 1;
-			paused = false;
+			GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<PauseMenu>().UnPause();
 		} else {
-			Time.timeScale = 0;
-			paused = true;
+			GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<PauseMenu>().Pause ();
 		}
 	}
 
 	private void pause(bool freeze) {
+		PauseMenu menu = GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<PauseMenu>();
 		paused = freeze;
 		if(paused) {
-			Time.timeScale = 0;
+			GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<PauseMenu>().Pause ();
 		} else {
+			
 			Time.timeScale = 1;
+			GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<PauseMenu>().UnPause ();
 		}
 	}
 	// ============================== FIXEDUPDATE ============================== 
@@ -131,7 +119,11 @@ public class CharacterPhysics: MonoBehaviour
 
 		if (Input.GetButtonDown("Pause")) {
             startMenu++;
-			togglePause();
+			if(paused) {
+				pause (false);
+			} else {
+				pause (true);
+			}
             Debug.Log(Input.GetButtonDown("Pause"));
         }
 
