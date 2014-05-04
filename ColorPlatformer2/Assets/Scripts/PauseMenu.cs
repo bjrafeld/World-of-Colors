@@ -112,6 +112,7 @@ public class PauseMenu : MonoBehaviour {
 	
 	public void ActivateButton(int button) {
 		if(button == 0) {
+			Time.timeScale = 1;
 			Application.LoadLevel("MenuStart");
 		} else if (button == 1) {
 			UnPause();
