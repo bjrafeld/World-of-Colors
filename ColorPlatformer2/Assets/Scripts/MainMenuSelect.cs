@@ -7,6 +7,7 @@ public class MainMenuSelect : MonoBehaviour {
 	TextMesh newGame;
 	TextMesh continueButton;
 	TextMesh credits;
+	TextMesh quit;
 
 	public Color selectedColor;
 	private Color normalColor;
@@ -16,8 +17,9 @@ public class MainMenuSelect : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		newGame = GameObject.FindGameObjectWithTag("NewGame").GetComponent<TextMesh>();
-		continueButton = GameObject.FindGameObjectWithTag("Continue").GetComponent<TextMesh>();;
-		credits = GameObject.FindGameObjectWithTag("Credits").GetComponent<TextMesh>();;
+		continueButton = GameObject.FindGameObjectWithTag("Continue").GetComponent<TextMesh>();
+		credits = GameObject.FindGameObjectWithTag("Credits").GetComponent<TextMesh>();
+		quit = GameObject.FindGameObjectWithTag("QuitGame").GetComponent<TextMesh>();
 
 		normalColor = newGame.color;
 
@@ -48,8 +50,8 @@ public class MainMenuSelect : MonoBehaviour {
 			stickLock = false;
 		}
 		if (currentButton == -1) {
-			currentButton = 2;
-		} else if (currentButton == 3) {
+			currentButton = 3;
+		} else if (currentButton == 4) {
 			currentButton = 0;
 		}
 		SetSelected(currentButton);
@@ -62,14 +64,22 @@ public class MainMenuSelect : MonoBehaviour {
 			newGame.color = selectedColor;
 			continueButton.color = normalColor;
 			credits.color = normalColor;
+			quit.color = normalColor;
 		} else if (button == 1) {
 			newGame.color = normalColor;
 			continueButton.color = selectedColor;
 			credits.color = normalColor;
+			quit.color = normalColor;
 		} else if (button == 2) {
 			newGame.color = normalColor;
 			continueButton.color = normalColor;
 			credits.color = selectedColor;
+			quit.color = normalColor;
+		} else if (button == 3) {
+			newGame.color = normalColor;
+			continueButton.color = normalColor;
+			credits.color = normalColor;
+			quit.color = selectedColor;
 		}
 	}
 
@@ -85,6 +95,8 @@ public class MainMenuSelect : MonoBehaviour {
 			}
 		} else if ( button == 2) {
 			Application.LoadLevel("CREDITS");
+		} else if ( button == 3) {
+			Application.Quit();
 		}
 	}
 }
