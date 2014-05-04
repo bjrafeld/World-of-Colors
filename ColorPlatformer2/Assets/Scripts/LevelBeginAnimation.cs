@@ -35,35 +35,46 @@ public class LevelBeginAnimation : MonoBehaviour {
 	private string nextLevel;
 
 	private float oldPlayerGravity;
+
+	public bool normalAnimation = true;
+	public bool startAnimation = false;
 	
 	// Use this for initialization
 	void Awake () {
-		player = Instantiate(playerPrefab, this.transform.position, Quaternion.identity) as GameObject;
-		min_Player_X = player.transform.localScale.x;
-		min_Player_Y = player.transform.localScale.y;
-		player.transform.localScale = new Vector3(min_Player_X, min_Player_Y, 1);
-		player.GetComponent<CharacterPhysics>().movementFrozen = true;
-		oldPlayerGravity = player.rigidbody2D.gravityScale;
-		player.rigidbody2D.gravityScale = 0;
+		if(normalAnimation) {
+			player = Instantiate(playerPrefab, this.transform.position, Quaternion.identity) as GameObject;
+			min_Player_X = player.transform.localScale.x;
+			min_Player_Y = player.transform.localScale.y;
+			player.transform.localScale = new Vector3(min_Player_X, min_Player_Y, 1);
+			player.GetComponent<CharacterPhysics>().movementFrozen = true;
+			oldPlayerGravity = player.rigidbody2D.gravityScale;
+			player.rigidbody2D.gravityScale = 0;
 
-		portal = Instantiate(portalPrefab, this.transform.position, Quaternion.identity) as GameObject;
-		portal.GetComponent<PortalTrigger>().buttonFade = false;
-		this.minSpeedPortal = portal.GetComponent<RotatePortal>().rotationSpeed;
+			portal = Instantiate(portalPrefab, this.transform.position, Quaternion.identity) as GameObject;
+			portal.GetComponent<PortalTrigger>().buttonFade = false;
+			this.minSpeedPortal = portal.GetComponent<RotatePortal>().rotationSpeed;
 
-		min_Portal_X = min_Portal * portal.transform.localScale.x;
-		min_Portal_Y = min_Portal * portal.transform.localScale.y;
-		
-		max_Portal_X = max_Portal * portal.transform.localScale.x;
-		max_Portal_Y = max_Portal * portal.transform.localScale.y;
-		portal.transform.localScale = new Vector3(min_Portal_X, min_Portal_Y, 1);
+			min_Portal_X = min_Portal * portal.transform.localScale.x;
+			min_Portal_Y = min_Portal * portal.transform.localScale.y;
+			
+			max_Portal_X = max_Portal * portal.transform.localScale.x;
+			max_Portal_Y = max_Portal * portal.transform.localScale.y;
+			portal.transform.localScale = new Vector3(min_Portal_X, min_Portal_Y, 1);
 
 
-		animationStarted = true;
+			animationStarted = true;
+		} else if(startAnimation && normalAnimation) {
+			player.rigidbody2D.gravityScale = 0.1f;
+		} else {
+			player = Instantiate(playerPrefab, this.transform.position, Quaternion.identity) as GameObject;
+		}
 		
 	}
 
 	void Start() {
-		portal.transform.position = player.transform.position;
+		if(normalAnimation) {
+			portal.transform.position = player.transform.position;
+		}
 	}
 	
 	// Update is called once per frame
@@ -83,9 +94,13 @@ public class LevelBeginAnimation : MonoBehaviour {
 		if( (portal.transform.localScale.x > max_Portal_X - .001 && portal.transform.localScale.x < max_Portal_X + .001) && ( player.transform.localScale.x > min_Player_X - .001 && player.transform.localScale.x < min_Player_Y + .001)) {
 			portalDoneGrowing = true;
 			animationStarted = false;
-			
-			player.GetComponent<CharacterPhysics>().movementFrozen = false;
-			player.rigidbody2D.gravityScale = oldPlayerGravity;
+
+			if(!startAnimation) {
+				player.GetComponent<CharacterPhysics>().movementFrozen = false;
+				player.rigidbody2D.gravityScale = oldPlayerGravity;
+			} else {
+				player.rigidbody2D.gravityScale = 0.1f;
+			}
 			return;
 		}
 		portal.transform.localScale = Vector3.Lerp (portal.transform.localScale, new Vector3(max_Portal_X, max_Portal_Y, 1), Time.deltaTime*shrinkSpeed);
@@ -105,5 +120,9 @@ public class LevelBeginAnimation : MonoBehaviour {
 		Destroy (portal);
 		portalDoneShrinking = false;
 
+	}
+	public void RestoreGravity() {
+		player.GetComponent<CharacterPhysics>().movementFrozen = false;
+		player.rigidbody2D.gravityScale = oldPlayerGravity;
 	}
 }

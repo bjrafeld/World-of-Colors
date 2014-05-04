@@ -19,10 +19,11 @@ public class DialogueTrigger : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D col) {
 		if(firstEntry) {
 			if(col.tag == "Player") {
-				col.gameObject.GetComponent<CharacterPhysics>().movementFrozen = true;
+				col.gameObject.GetComponent<FreezeWeight>().Freeze(col.gameObject.transform.position);
 				firstLine.GetComponent<DialogueImpl>().StartAnim();
 			}
 			firstEntry = false;
 		}
 	}
+
 }

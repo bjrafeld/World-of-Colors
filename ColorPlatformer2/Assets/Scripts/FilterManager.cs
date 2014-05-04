@@ -57,7 +57,7 @@ public class FilterManager : MonoBehaviour {
 		if(PlayerPrefs.GetInt("Filtering") == 1) {
 			powerToFilter = true;
 		} else if (PlayerPrefs.GetInt ("Filtering") == 0) {
-			powerToFilter = false;
+			//powerToFilter = false;
 		}
 	}
 
@@ -99,6 +99,8 @@ public class FilterManager : MonoBehaviour {
 	}
 
 	public void SetColorFilter(int color) {
+
+		startColor = color;
 
 		lastActiveFilter = activeFilter;
 

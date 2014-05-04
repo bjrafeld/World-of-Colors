@@ -35,11 +35,6 @@ public class LevelEndAnimation : MonoBehaviour {
 		_portal = this.gameObject.GetComponent<RotatePortal>();
 		nextLevel = this.gameObject.GetComponent<PortalTrigger>().nextLevel;
 
-		min_Portal_X = min_Portal * this.transform.localScale.x;
-		min_Portal_Y = min_Portal * this.transform.localScale.y;
-
-		max_Portal_X = max_Portal * this.transform.localScale.x;
-		max_Portal_Y = max_Portal * this.transform.localScale.y;
 
 	}
 	
@@ -57,6 +52,12 @@ public class LevelEndAnimation : MonoBehaviour {
 	}
 
 	public void StartAnimation(GameObject player) {
+		min_Portal_X = min_Portal * this.transform.localScale.x;
+		min_Portal_Y = min_Portal * this.transform.localScale.y;
+		
+		max_Portal_X = max_Portal * this.transform.localScale.x;
+		max_Portal_Y = max_Portal * this.transform.localScale.y;
+
 		this.player = player;
 		this.player.GetComponent<CharacterPhysics>().movementFrozen = true;
 		this.player.rigidbody2D.gravityScale = 0;
@@ -88,6 +89,7 @@ public class LevelEndAnimation : MonoBehaviour {
 	}
 
 	private void DestroyAndLoadNext() {
+		Debug.LogWarning ("Opening Next Level");
 		Destroy (player);
 		Application.LoadLevel(nextLevel);
 		Destroy (this.gameObject);
