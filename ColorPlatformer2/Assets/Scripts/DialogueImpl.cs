@@ -25,6 +25,7 @@ public class DialogueImpl : MonoBehaviour {
 
 	public float timeBeforePortal = 3f;
 	public bool timeBefore = false;
+	public bool endGame = false;
 
 	// Use this for initialization
 	void Start () {
@@ -69,6 +70,10 @@ public class DialogueImpl : MonoBehaviour {
 				}
 				if(triggerCrystal != null) {
 					triggerCrystal.TurnOn();
+				}
+				if(endGame) {
+					PlayerPrefs.DeleteAll();
+					Application.LoadLevel("credits");
 				}
 			} else {
 				nextLine.StartAnim();

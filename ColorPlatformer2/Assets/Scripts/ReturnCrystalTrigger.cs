@@ -125,7 +125,7 @@ public class ReturnCrystalTrigger : MonoBehaviour {
 			crystalDoneMoving = true;
 			crystalCreated = false;
 		}
-		crystal.transform.position = Vector3.Lerp (crystal.transform.position, crystaEndSpot.transform.position, elapsed/duration);
+		crystal.transform.position = Vector3.Lerp (crystal.transform.position, crystaEndSpot.transform.position, (elapsed/duration * Time.deltaTime));
 	}
 
 	public void TurnOn() {

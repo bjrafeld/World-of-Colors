@@ -39,13 +39,14 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>D:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>D:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scenes\Endings\Color\CameraPan.cs" />
      <Compile Include="Assets\Scripts\BlueGate.cs" />
      <Compile Include="Assets\Scripts\CameraMovement.cs" />
      <Compile Include="Assets\Scripts\CharacterPhysics.cs" />
@@ -57,6 +58,7 @@
      <Compile Include="Assets\Scripts\DestroyOffScreen.cs" />
      <Compile Include="Assets\Scripts\DialogueImpl.cs" />
      <Compile Include="Assets\Scripts\DialogueTrigger.cs" />
+     <Compile Include="Assets\Scripts\EndingTrigger.cs" />
      <Compile Include="Assets\Scripts\ExitCredits.cs" />
      <Compile Include="Assets\Scripts\FadeInStart.cs" />
      <Compile Include="Assets\Scripts\FilterManager.cs" />
