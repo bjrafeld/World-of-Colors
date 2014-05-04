@@ -46,6 +46,7 @@ public class DialogueImpl : MonoBehaviour {
 			if(Input.GetAxis("Jump") != 0 || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown (KeyCode.Space)) {
 				fadeOutPressed = true;
 				fadeInComplete = false;
+				Debug.Log ("I pressed next.");
 			}
 		} else if (fadeOutPressed) {
 			FadeOut();
@@ -72,7 +73,13 @@ public class DialogueImpl : MonoBehaviour {
 			} else {
 				nextLine.StartAnim();
 			}
-			//Destroy (this.gameObject);
+			if(timeBefore) {
+				if(timeBeforePortal <= 0) {
+					Destroy (this.gameObject);
+				}
+			} else {
+				Destroy (this.gameObject);
+			}
 		}
 		
 	}
@@ -97,6 +104,7 @@ public class DialogueImpl : MonoBehaviour {
 			}
 		}
 		if(innerFadeInComplete) {
+			Debug.Log ("Done fading in");
 			startAnimation = false;
 			fadeInComplete = true;
 		}
