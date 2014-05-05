@@ -70,12 +70,21 @@ public class FilterManager : MonoBehaviour {
 
     void Awake()
     {
-        _platforms = GetComponentsInChildren<BoxCollider2D>();
-        _sprites = new SpriteRenderer[_platforms.Length];
-        for (int i = 0; i < _platforms.Length; i++)
+		_sprites = GetComponentsInChildren<SpriteRenderer>();
+		_platforms = new BoxCollider2D[_sprites.Length];
+        //_platforms = GetComponentsInChildren<BoxCollider2D>();
+        //_sprites = new SpriteRenderer[_platforms.Length];
+        for (int i = 0; i < _sprites.Length; i++)
         {
-            _sprites[i] = _platforms[i].GetComponent<SpriteRenderer>();
-            _sprites[i].sortingOrder = 1;
+			BoxCollider2D col = _sprites[i].GetComponent<BoxCollider2D>();
+			if(col == null) {
+				_platforms[i] = null;
+			} else {
+				_platforms[i] = col;
+				_sprites[i].sortingOrder = 1;
+			}
+            //_sprites[i] = _platforms[i].GetComponent<SpriteRenderer>();
+            //_sprites[i].sortingOrder = 1;
         }
     }
 	// Update is called once per frame
@@ -102,7 +111,7 @@ public class FilterManager : MonoBehaviour {
 	            startColor += 1;
 				
 				startColor = startColor % 3;
-				SetColorFilter((startColor)); 
+				SetColorFilter(startColor); 
 	        }
 		}
 	}
@@ -151,30 +160,42 @@ public class FilterManager : MonoBehaviour {
 
 		for(int i = 0; i < _platforms.Length; i++) {
             BoxCollider2D platform = _platforms[i];
-            SpriteRenderer render = _sprites[i];
-			if (platform.tag == activeFilter) {
-				render.color = Color.white;
-                //render.material = defaultShader;
-                render.sortingOrder = 0;
-                platform.enabled = true;
-			} else {
-				render.color = DesaturateColor(render.color);
-                //render.material = filterShader;
-                render.sortingOrder = 0;
-				platform.enabled = false;
-			}
+			SpriteRenderer render = _sprites[i];
+			if(platform != null) {
+				if (platform.tag == activeFilter) {
+					render.color = Color.white;
+	                //render.material = defaultShader;
+	                render.sortingOrder = 0;
+	                platform.enabled = true;
+				} else {
+					render.color = DesaturateColor(render.color);
+	                //render.material = filterShader;
+	                render.sortingOrder = 0;
+					platform.enabled = false;
+				}
 
-			if(lastActiveFilter == "neon_blue_ground") {
-				if(platform.tag == "neon_blue_ground") {
-					BlueGate gate = platform.GetComponent<BlueGate>();
-					if(gate != null) {
-						gate.TriggerOff();
+				if(lastActiveFilter == "neon_blue_ground") {
+					if(platform.tag == "neon_blue_ground") {
+						BlueGate gate = platform.GetComponent<BlueGate>();
+						if(gate != null) {
+							gate.TriggerOff();
+						}
 					}
+				}
+			} else {
+				if (render.gameObject.tag == activeFilter) {
+					render.color = Color.white;
+					//render.material = defaultShader;
+					render.sortingOrder = 0;
+				} else {
+					render.color = DesaturateColor(render.color);
+					//render.material = filterShader;
+					render.sortingOrder = 0;
 				}
 			}
 		}
 	}
-
+	
 	public void SetColorFilterTag(string tagName) {
 		if(tagName == colorTag1) {
 			SetColorFilter(0);
