@@ -181,6 +181,14 @@ public class CharacterPhysics: MonoBehaviour
 	            {
 	                _rigidbody.velocity = new Vector2(physVel.x, jumpVel);
 	                grounded = false;
+                    if (physVel.x >= 0)
+                    {
+                        _anim.SetInteger("state", 2);
+                    }
+                    else if (physVel.x < 0)
+                    {
+                        _anim.SetInteger("state", 5);
+                    }
 					int jumpIndex = Random.Range (0, 3);
 					if(jumpIndex == 0) {
 						audio.PlayOneShot(jump1);
@@ -219,9 +227,17 @@ public class CharacterPhysics: MonoBehaviour
 	}
     public void DeathAnim()
     {
-        _anim.SetInteger("state", 3);
         this.gameObject.collider2D.enabled = false;
         this.rigidbody2D.gravityScale = 0;
+        if (physVel.x >= 0)
+        {
+            _anim.SetInteger("state", 3);
+        }
+        else if (physVel.x < 0)
+        {
+            _anim.SetInteger("state", 6);
+        }
+        
     }
 	public void KillPlayer() {
 		Application.LoadLevel(Application.loadedLevelName);
