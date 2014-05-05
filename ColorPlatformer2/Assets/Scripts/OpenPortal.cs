@@ -35,6 +35,8 @@ public class OpenPortal : MonoBehaviour {
 
 	
 	public bool normalAnimation = true;
+
+	private AudioClip portalClip;
 	
 	// Use this for initialization
 	void Awake () {
@@ -51,6 +53,8 @@ public class OpenPortal : MonoBehaviour {
 			max_Portal_X = max_Portal * portal.transform.localScale.x;
 			max_Portal_Y = max_Portal * portal.transform.localScale.y;
 			portal.transform.localScale = new Vector3(min_Portal_X, min_Portal_Y, 1);
+
+		portalClip = Resources.Load("portal") as AudioClip;
 		
 	}
 	
@@ -59,6 +63,7 @@ public class OpenPortal : MonoBehaviour {
 	}
 
 	public void SpawnPortal() {
+		GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<AudioSource>().PlayOneShot(portalClip);
 		animationStarted = true;
 	}
 	

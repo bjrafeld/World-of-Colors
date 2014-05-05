@@ -27,11 +27,14 @@ public class PortalTrigger : MonoBehaviour {
 
 	public bool buttonFade = true;
 
+	private AudioClip portalClip;
+
 	// Use this for initialization
 	void Start () {
 		_portal = this.gameObject.GetComponent<RotatePortal>();
 		_endAnim = this.gameObject.GetComponent<LevelEndAnimation>();
 		this.normalSpeedPortal = _portal.rotationSpeed;
+		portalClip = Resources.Load ("portal") as AudioClip;
 	}
 	
 	// Update is called once per frame
@@ -52,6 +55,7 @@ public class PortalTrigger : MonoBehaviour {
 					animationNotStarted = false;
 					Destroy (xButton);
 					_endAnim.StartAnimation(player);
+					GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<AudioSource>().PlayOneShot(portalClip);
 				}
 			}
 		}

@@ -1,12 +1,20 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/FilterManager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MainMenuSelect.cs">
     <Files>
-      <File FileName="Assets/Scripts/CharacterPhysics.cs" Line="196" Column="14" />
-      <File FileName="Assets/Scripts/FilterManager.cs" Line="11" Column="33" />
-      <File FileName="Assets/Scripts/DestroyOffScreen.cs" Line="25" Column="3" />
-      <File FileName="Assets/Scripts/FreezeOnRed.cs" Line="24" Column="75" />
-      <File FileName="Assets/Scripts/FreezeWeight.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\PortalTrigger.cs" Line="58" Column="6" />
+      <File FileName="Assets\Scripts\CharacterPhysics.cs" Line="190" Column="32" />
+      <File FileName="Assets\Scripts\PauseMenu.cs" Line="114" Column="20" />
+      <File FileName="Assets\Scripts\LevelBeginAnimation.cs" Line="73" Column="55" />
+      <File FileName="Assets\Scripts\MainMenuSelect.cs" Line="38" Column="55" />
+      <File FileName="Assets\Scripts\EndingTrigger.cs" Line="126" Column="38" />
+      <File FileName="Assets\Scripts\ReturnCrystalTrigger.cs" Line="128" Column="143" />
+      <File FileName="Assets\Scenes\Endings\Color\CameraPan.cs" Line="31" Column="131" />
+      <File FileName="Assets\Scripts\DialogueImpl.cs" Line="130" Column="6" />
+      <File FileName="Assets\Scripts\FilterManager.cs" Line="111" Column="3" />
+      <File FileName="Assets\Scripts\TriggerPortal.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\OpenPortal.cs" Line="57" Column="53" />
+      <File FileName="Assets\Scripts\CrystalSpawnAndCollect.cs" Line="10" Column="19" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

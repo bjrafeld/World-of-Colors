@@ -38,6 +38,8 @@ public class LevelBeginAnimation : MonoBehaviour {
 
 	public bool normalAnimation = true;
 	public bool startAnimation = false;
+
+	private AudioClip portalClip;
 	
 	// Use this for initialization
 	void Awake () {
@@ -68,12 +70,13 @@ public class LevelBeginAnimation : MonoBehaviour {
 		} else {
 			player = Instantiate(playerPrefab, this.transform.position, Quaternion.identity) as GameObject;
 		}
-		
+		portalClip = Resources.Load ("portal") as AudioClip;
 	}
 
 	void Start() {
 		if(normalAnimation) {
 			portal.transform.position = player.transform.position;
+			GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<AudioSource>().PlayOneShot(portalClip);
 		}
 	}
 	
