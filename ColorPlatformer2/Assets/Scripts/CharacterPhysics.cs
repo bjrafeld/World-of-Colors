@@ -194,7 +194,7 @@ public class CharacterPhysics: MonoBehaviour
             }
             else if (physVel.x < 0)
             {
-                _anim.SetInteger("state", 3);
+                _anim.SetInteger("state", 4);
             }
         }
 
@@ -207,9 +207,9 @@ public class CharacterPhysics: MonoBehaviour
 	}
     public void DeathAnim()
     {
+        _anim.SetInteger("state", 3);
         this.gameObject.collider2D.enabled = false;
         this.rigidbody2D.gravityScale = 0;
-        _anim.SetInteger("state", 3);
     }
 	public void KillPlayer() {
 		Application.LoadLevel(Application.loadedLevelName);
