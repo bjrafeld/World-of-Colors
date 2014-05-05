@@ -194,7 +194,7 @@ public class CharacterPhysics: MonoBehaviour
             }
             else if (physVel.x < 0)
             {
-                _anim.SetInteger("state", 3);
+                _anim.SetInteger("state", 2);
             }
         }
 
