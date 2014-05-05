@@ -20,14 +20,9 @@ public class FreezeOnRed : MonoBehaviour {
 		Debug.Log ("Collided with " + col.gameObject.tag);
 		if(col.gameObject.tag == "weight" || col.gameObject.tag == "Player") {
 			col.gameObject.GetComponent<FreezeWeight>().Freeze (col.gameObject.transform.position);
-		}
-	}
-
-	void OnCollisionExit2D(Collision2D col) {
-		Debug.Log ("Collided with " + col.gameObject.tag);
-		if(col.gameObject.tag == "weight" || col.gameObject.tag == "Player") {
-			col.gameObject.GetComponent<FreezeWeight>().UnFreeze ();
-			
+			if(col.gameObject.tag == "Player") {
+				col.gameObject.GetComponent<CharacterPhysics>().movementFrozen = true;
+			}
 		}
 	}
 

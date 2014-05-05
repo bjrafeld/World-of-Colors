@@ -8,7 +8,7 @@ public class FilterManager : MonoBehaviour {
 	private const int COLOR3 = 2;
 
     const float DESAT_AMT = 0.5f;
-    const float FADE_ALPHA = 0.5f;
+    const float FADE_ALPHA = 0.35f;
 
 	public int startColor;
 
