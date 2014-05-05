@@ -21,6 +21,10 @@ public class CharacterPhysics: MonoBehaviour
 
     private int startMenu;
 
+	public AudioClip jump1;
+	public AudioClip jump2;
+	public AudioClip jump3;
+
 	protected Transform _transform;
 	protected Rigidbody2D _rigidbody;
     protected Animator _anim;
@@ -177,6 +181,14 @@ public class CharacterPhysics: MonoBehaviour
 	            {
 	                _rigidbody.velocity = new Vector2(physVel.x, jumpVel);
 	                grounded = false;
+					int jumpIndex = Random.Range (0, 3);
+					if(jumpIndex == 0) {
+						audio.PlayOneShot(jump1);
+					} else if (jumpIndex == 1) {
+						audio.PlayOneShot(jump2);
+					} else if (jumpIndex == 2) {
+						audio.PlayOneShot(jump3);
+					}
 	            }
 	        }
 		}

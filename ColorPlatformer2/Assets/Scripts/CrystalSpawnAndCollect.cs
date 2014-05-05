@@ -7,8 +7,11 @@ public class CrystalSpawnAndCollect : MonoBehaviour {
 	public int particleCount = 20;
 	public float explosionForce;
 
+	private AudioClip crystalClip;
+
 	// Use this for initialization
 	void Start () {
+		crystalClip = Resources.Load ("crystal") as AudioClip;
 		//Check if it's already been collected
 	}
 	
@@ -21,6 +24,7 @@ public class CrystalSpawnAndCollect : MonoBehaviour {
 		//Save that's it has been collected
 		//Save the total count of crystals
 		if(col.tag == "Player") {
+			GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<AudioSource>().PlayOneShot(crystalClip);
 			for(int i = 0; i < particleCount; i++) {
 				Quaternion rotation = Random.rotation;
 				rotation.x = 0;

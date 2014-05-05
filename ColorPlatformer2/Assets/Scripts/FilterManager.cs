@@ -10,6 +10,8 @@ public class FilterManager : MonoBehaviour {
     const float DESAT_AMT = 0.5f;
     const float FADE_ALPHA = 0.35f;
 
+	public AudioClip filterClip;
+
 	public int startColor;
 
     public Material filterShader;
@@ -62,6 +64,8 @@ public class FilterManager : MonoBehaviour {
 		} else if (PlayerPrefs.GetInt ("Filtering") == 0) {
 			//powerToFilter = false;
 		}
+
+		filterClip = Resources.Load("filtering") as AudioClip;
 	}
 
     void Awake()
@@ -78,6 +82,7 @@ public class FilterManager : MonoBehaviour {
 	void Update () {
 		if(powerToFilter) {
 			if(Input.GetKeyDown(KeyCode.A) || Input.GetButtonDown("Blue")) {
+				GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<AudioSource>().PlayOneShot(filterClip);
 	 
 	            if (startColor == 0)
 	            {
@@ -93,6 +98,7 @@ public class FilterManager : MonoBehaviour {
 			} /*else if (Input.GetKeyDown(KeyCode.S) || Input.GetAxis("Red") != 0) {
 				SetColorFilter(COLOR2);
 			} */else if (Input.GetKeyDown(KeyCode.D) || Input.GetButtonDown("Yellow")) {
+				GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<AudioSource>().PlayOneShot(filterClip);
 	            startColor += 1;
 				
 				startColor = startColor % 3;

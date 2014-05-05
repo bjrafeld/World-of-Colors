@@ -17,6 +17,8 @@ public class MainMenuSelect : MonoBehaviour {
 	private bool fadeDone = false;
 	private bool buttonPressed = false;
 
+	private AudioClip menuClip;
+
 	// Use this for initialization
 	void Start () {
 		newGame = GameObject.FindGameObjectWithTag("NewGame").GetComponent<TextMesh>();
@@ -33,13 +35,14 @@ public class MainMenuSelect : MonoBehaviour {
 		fadeDone = false;
 		buttonPressed = false;
 
-
+		menuClip = Resources.Load("filtering") as AudioClip;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(inputAllowed) {
 			if(Input.GetKeyDown(KeyCode.UpArrow) || (Input.GetAxisRaw("VerticalJoy") == 1 && stickLock == false)) {
+				Camera.main.GetComponent<AudioSource>().PlayOneShot(menuClip);
 				Debug.Log ("Changing the menu button Up");
 				stickLock = true;
 				currentButton--;
@@ -47,6 +50,7 @@ public class MainMenuSelect : MonoBehaviour {
 			}
 
 			if (Input.GetKeyDown(KeyCode.DownArrow) || (Input.GetAxisRaw("VerticalJoy") == -1 && stickLock == false)) {
+				Camera.main.GetComponent<AudioSource>().PlayOneShot(menuClip);
 				Debug.Log ("Changing the menu button Down");
 				stickLock = true;
 				currentButton++;
