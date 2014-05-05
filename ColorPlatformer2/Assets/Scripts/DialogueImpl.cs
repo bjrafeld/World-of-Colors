@@ -26,6 +26,7 @@ public class DialogueImpl : MonoBehaviour {
 	public float timeBeforePortal = 3f;
 	public bool timeBefore = false;
 	public bool endGame = false;
+	public bool bumperButtonShow = false;
 
 	// Use this for initialization
 	void Start () {
@@ -74,6 +75,9 @@ public class DialogueImpl : MonoBehaviour {
 				if(endGame) {
 					PlayerPrefs.DeleteAll();
 					Application.LoadLevel("credits");
+				}
+				if(bumperButtonShow) {
+					GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<BumperFadeIn>().ShowBumpers();
 				}
 			} else {
 				nextLine.StartAnim();

@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scenes\Endings\Color\CameraPan.cs" />
      <Compile Include="Assets\Scripts\BlueGate.cs" />
+     <Compile Include="Assets\Scripts\BumperFadeIn.cs" />
      <Compile Include="Assets\Scripts\CameraMovement.cs" />
      <Compile Include="Assets\Scripts\CharacterPhysics.cs" />
      <Compile Include="Assets\Scripts\Colorizer.cs" />

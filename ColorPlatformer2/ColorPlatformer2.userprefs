@@ -1,8 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/FilterManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/FilterManager.cs" Line="50" Column="41" />
+      <File FileName="Assets/Scripts/CharacterPhysics.cs" Line="196" Column="14" />
+      <File FileName="Assets/Scripts/FilterManager.cs" Line="11" Column="33" />
+      <File FileName="Assets/Scripts/DestroyOffScreen.cs" Line="25" Column="3" />
+      <File FileName="Assets/Scripts/FreezeOnRed.cs" Line="24" Column="75" />
+      <File FileName="Assets/Scripts/FreezeWeight.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
