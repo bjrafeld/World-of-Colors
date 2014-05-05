@@ -51,6 +51,11 @@ public class FilterManager : MonoBehaviour {
     private float screenHeight;
 
     public GameObject gradient;
+    public GameObject leftGradient;
+    public GameObject rightGradient;
+    public Color c0;
+    public Color c1;
+    public Color c2;
 	//MAKE SURE TO CHANGE
 	public static bool powerToFilter = true;
 
@@ -81,11 +86,15 @@ public class FilterManager : MonoBehaviour {
             Vector3 oGradScale = gradient.transform.localScale;
             Vector3 gradScale = new Vector3(oGradScale.x, oGradScale.y * heightScale, oGradScale.z);
             gradient.transform.localScale = gradScale;
+            gradient.tag = "LeftGradient";
             Instantiate(gradient, gradPos, Quaternion.identity);
+            leftGradient = GameObject.FindGameObjectWithTag("LeftGradient");
             gradScale.Set(gradScale.x * -1, gradScale.y, gradScale.z);
             gradPos.Set(gradPos.x * -1, gradPos.y, gradPos.z);
             gradient.transform.localScale = gradScale;
+            gradient.tag = "RightGradient";
             Instantiate(gradient, gradPos, Quaternion.identity);
+            rightGradient = GameObject.FindGameObjectWithTag("RightGradient");
         }
 
 
@@ -136,6 +145,21 @@ public class FilterManager : MonoBehaviour {
 				startColor = startColor % 3;
 				SetColorFilter(startColor); 
 	        }
+            if (startColor == 0)
+            {
+                leftGradient.GetComponent<SpriteRenderer>().color = c2;
+                rightGradient.GetComponent<SpriteRenderer>().color = c1;
+            }
+            else if (startColor == 1)
+            {
+                leftGradient.GetComponent<SpriteRenderer>().color = c0;
+                rightGradient.GetComponent<SpriteRenderer>().color = c2;
+            }
+            else if (startColor == 2)
+            {
+                leftGradient.GetComponent<SpriteRenderer>().color = c1;
+                rightGradient.GetComponent<SpriteRenderer>().color = c0;
+            }
 		}
 	}
 
