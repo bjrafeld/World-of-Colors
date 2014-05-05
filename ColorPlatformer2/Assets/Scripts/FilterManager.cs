@@ -77,9 +77,9 @@ public class FilterManager : MonoBehaviour {
             Vector3 v3TopLeft = Camera.main.ViewportToWorldPoint(v3ViewPort);
             float heightScale = screenHeight / 768f;
             Debug.Log(screenHeight + " " + heightScale);
-            Vector3 gradPos = new Vector3(v3BottomLeft.x, ((v3BottomLeft.y + v3TopLeft.y) / 2), 0);
+            Vector3 gradPos = new Vector3((v3BottomLeft.x + 1.28f), ((v3BottomLeft.y + v3TopLeft.y) / 2), 0);
             Vector3 oGradScale = gradient.transform.localScale;
-            Vector3 gradScale = new Vector3(oGradScale.x, -1 * oGradScale.y * heightScale, oGradScale.z);
+            Vector3 gradScale = new Vector3(oGradScale.x, oGradScale.y * heightScale, oGradScale.z);
             gradient.transform.localScale = gradScale;
             Instantiate(gradient, gradPos, Quaternion.identity);
             gradScale.Set(gradScale.x * -1, gradScale.y, gradScale.z);
