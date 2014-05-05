@@ -7,6 +7,7 @@ public class FilterManager : MonoBehaviour {
 	private const int COLOR2 = 1;
 	private const int COLOR3 = 2;
 
+    public const float DISTANCE = 10f;
     const float DESAT_AMT = 0.5f;
     const float FADE_ALPHA = 0.35f;
 
@@ -47,7 +48,9 @@ public class FilterManager : MonoBehaviour {
 	private Rigidbody2D _playerRigidBody;
 	private float oldGravity;
 
+    private float screenHeight;
 
+    public GameObject gradient;
 	//MAKE SURE TO CHANGE
 	public static bool powerToFilter = true;
 
@@ -56,9 +59,9 @@ public class FilterManager : MonoBehaviour {
 		_player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterPhysics>() as CharacterPhysics;
 		_playerRigidBody = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>() as Rigidbody2D;
 		oldGravity = 10;
-
-        startColor = startColor;
-		SetColorFilter(startColor);
+        screenHeight = Screen.currentResolution.height;
+        SetColorFilter(startColor);
+        gradient = (GameObject)Resources.Load("gradient");
 		if(PlayerPrefs.GetInt("Filtering") == 1) {
 			powerToFilter = true;
 		} else if (PlayerPrefs.GetInt ("Filtering") == 0) {
@@ -66,6 +69,26 @@ public class FilterManager : MonoBehaviour {
 		}
 
 		filterClip = Resources.Load("filtering") as AudioClip;
+        if (powerToFilter)
+        {
+            Vector3 v3ViewPort = new Vector3(0, 0, DISTANCE);
+            Vector3 v3BottomLeft = Camera.main.ViewportToWorldPoint(v3ViewPort);
+            v3ViewPort.Set(0, 1, DISTANCE);
+            Vector3 v3TopLeft = Camera.main.ViewportToWorldPoint(v3ViewPort);
+            float heightScale = screenHeight / 768f;
+            Debug.Log(screenHeight + " " + heightScale);
+            Vector3 gradPos = new Vector3((v3BottomLeft.x + 1.28f), ((v3BottomLeft.y + v3TopLeft.y) / 2), 0);
+            Vector3 oGradScale = gradient.transform.localScale;
+            Vector3 gradScale = new Vector3(oGradScale.x, oGradScale.y * heightScale, oGradScale.z);
+            gradient.transform.localScale = gradScale;
+            Instantiate(gradient, gradPos, Quaternion.identity);
+            gradScale.Set(gradScale.x * -1, gradScale.y, gradScale.z);
+            gradPos.Set(gradPos.x * -1, gradPos.y, gradPos.z);
+            gradient.transform.localScale = gradScale;
+            Instantiate(gradient, gradPos, Quaternion.identity);
+        }
+
+
 	}
 
     void Awake()
